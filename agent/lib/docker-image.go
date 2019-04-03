@@ -61,7 +61,7 @@ func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem,
 
 func ImagesPrune() (types.ImagesPruneReport, error) {
 	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv)
+	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
 		panic(err)
 	}
