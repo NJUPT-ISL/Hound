@@ -1,16 +1,22 @@
 package lib
 
 import (
+	"fmt"
+	"io"
+	"os"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
-	"io"
-	"os"
 )
 
 
 func ListAllImages() ([]types.ImageSummary, error) {
+	defer func() {
+		if err := recover() ; err!= nil{
+			fmt.Println(err)
+		}
+	}()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
 		panic(err)
@@ -24,6 +30,12 @@ func ListAllImages() ([]types.ImageSummary, error) {
 }
 
 func ImagePull(ImageName string) (io.ReadCloser, error) {
+	defer func() {
+		if err := recover() ; err!= nil{
+			fmt.Println(err)
+		}
+	}()
+
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
@@ -35,17 +47,23 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 	}
 	defer func() {
 		outerr := out.Close()
-		if outerr != nil {
+		if err != nil {
 			panic(outerr)
 		}
 	}()
 	_, ioerr := io.Copy(os.Stdout, out)
-	if ioerr != nil{
+	if err != nil{
 		panic(ioerr)
 	}
 	return out, err
 }
 func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem, error) {
+	defer func() {
+		if err := recover() ; err!= nil{
+			fmt.Println(err)
+		}
+	}()
+
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
@@ -60,6 +78,11 @@ func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem,
 
 
 func ImagesPrune() (types.ImagesPruneReport, error) {
+	defer func() {
+		if err := recover() ; err!= nil{
+			fmt.Println(err)
+		}
+	}()
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
