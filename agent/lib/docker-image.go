@@ -2,12 +2,12 @@ package lib
 
 import (
 	"fmt"
-	"io"
-	"os"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
+	"io"
+	"os"
 )
 
 
@@ -92,5 +92,20 @@ func ImagesPrune() (types.ImagesPruneReport, error) {
 	if err != nil {
 		panic(err)
 	}
+	return out, err
+}
+
+func DockerInfo()  (types.Info, error){
+	defer func() {
+		if err := recover() ; err!= nil{
+			fmt.Println(err)
+		}
+	}()
+	ctx := context.Background()
+	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
+	if err != nil {
+		panic(err)
+	}
+	out, err := cli.Info(ctx)
 	return out, err
 }

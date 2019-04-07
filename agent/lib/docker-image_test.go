@@ -40,3 +40,11 @@ func TestImagesPrune(t *testing.T) {
 		panic(err)
 	}
 }
+
+func TestDockerInfo(t *testing.T) {
+	info,err := DockerInfo()
+	if err != nil {
+		panic(err)
+	}
+	t.Logf(info.ServerVersion)
+}

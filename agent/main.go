@@ -6,5 +6,5 @@ import  (
 
 func main() {
 	r := routers.InitRouter()
-	r.Run(":8080") // listen and serve on 0.0.0.0:8080
+	_ = r.RunTLS(":8080","pem/server.crt","pem/server.key") // listen and serve on 0.0.0.0:8080
 }
