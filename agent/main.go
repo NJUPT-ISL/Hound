@@ -1,11 +1,11 @@
 package main
-import  (
+import (
 	"./routers"
+	"./tokens"
 	"github.com/gin-gonic/gin"
 	"io"
-	"os"
 	"log"
-	"./tokens"
+	"os"
 )
 
 
@@ -18,7 +18,6 @@ func main() {
 	token := tokens.Token{}
 	token.GenerateToken()
 	log.Printf("The Hound Agent token is:"+token.GetToken())
-
 	f, err := os.Create("log/agent.log")
 	if err != nil{
 		panic(err)

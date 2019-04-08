@@ -2,9 +2,9 @@ package routers
 
 import (
 	"../api"
-	"github.com/gin-gonic/gin"
 	"../middlewares"
 	"../tokens"
+	"github.com/gin-gonic/gin"
 )
 
 func InitRouter(token *tokens.Token) *gin.Engine {
@@ -14,7 +14,7 @@ func InitRouter(token *tokens.Token) *gin.Engine {
 	router.Use(gin.Recovery())
 
 	// Enable Token
-	router.Use(middlewares.TokenAuthMiddleware(token))
+	router.Use(middlewares.TokenRequestMiddleware(token),middlewares.TokenAuthMiddleware(token),middlewares.TokenRefreshMiddleware(token))
 	imageGroup := router.Group("/image")
 	{
 		// Get Action
@@ -24,6 +24,10 @@ func InitRouter(token *tokens.Token) *gin.Engine {
 		// Post Action
 		imageGroup.POST("/pull", api.PostImagePull)
 		imageGroup.POST("/remove", api.PostImageRemove)
+	}
+	tokenGroup := router.Group("/token")
+	{
+		tokenGroup.GET("/refresh", api.GetRefresh)
 	}
 	return router
 }

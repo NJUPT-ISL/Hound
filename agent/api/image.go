@@ -41,13 +41,10 @@ func GetDockerInfo(c *gin.Context){
 		"ContainersRunning": info.ContainersRunning,
 		"ContainersPaused": info.ContainersPaused,
 		"ContainersStopped": info.ContainersStopped,
-
 	})
 }
 
-
 // Post Action
-
 func PostImagePull(c *gin.Context){
 	imageNames := c.PostFormArray("imageName")
 	go func (){
