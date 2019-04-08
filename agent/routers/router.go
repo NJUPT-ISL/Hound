@@ -3,13 +3,18 @@ package routers
 import (
 	"../api"
 	"github.com/gin-gonic/gin"
+	"../middlewares"
+	"../tokens"
 )
-func InitRouter() *gin.Engine {
+
+func InitRouter(token *tokens.Token) *gin.Engine {
 	router := gin.New()
 	router.Use(gin.Logger())
 
 	router.Use(gin.Recovery())
 
+	// Enable Token
+	router.Use(middlewares.TokenAuthMiddleware(token))
 	imageGroup := router.Group("/image")
 	{
 		// Get Action
