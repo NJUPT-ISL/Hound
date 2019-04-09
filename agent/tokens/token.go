@@ -9,6 +9,9 @@ type Token struct {
 	token string
 }
 
+
+
+
 func (T *Token) GenerateToken() {
 	token, err := jwt.NewWithClaims(
 		jwt.SigningMethodES256,

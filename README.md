@@ -10,6 +10,7 @@ It is mainly used for the management and pruning of container images in a contai
 ### Feature
 - Service image pre-pull in batches
 - Cluster image prune
+- Mutual TLS and JWT authentication
 - Set the pulling image according to the label node
 - Periodically update the image
 

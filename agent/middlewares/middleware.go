@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-	"github.com/gin-gonic/gin"
 	"../tokens"
+	"github.com/gin-gonic/gin"
 	"log"
 	"os"
 )
