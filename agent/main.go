@@ -1,5 +1,7 @@
 package main
+
 import (
+	"./lib"
 	"./routers"
 	"./tokens"
 	"github.com/gin-gonic/gin"
@@ -10,8 +12,9 @@ import (
 
 
 func main() {
+	lib.SendJoin()
 	// Disable Debug mode
-	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode(gin.ReleaseMode)
 	// Enable Logs
 	gin.DisableConsoleColor()
 	// GenerateToken

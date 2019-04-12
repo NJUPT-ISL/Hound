@@ -1,12 +1,19 @@
 package models
 
 import (
-	"time"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"time"
 )
 
-var DB *gorm.DB
+var db *gorm.DB
+
+type Model struct {
+	ID         int `gorm:"primary_key" json:"id"`
+	CreatedOn  int `json:"created_on"`
+	ModifiedOn int `json:"modified_on"`
+	DeletedOn  int `json:"deleted_on"`
+}
 
 type Tokens struct {
 	HostName string `gorm:"unique;not null"`
@@ -30,17 +37,7 @@ type Logs struct {
 	Node string
 }
 
-func OpenDB() *gorm.DB{
-	db, err := gorm.Open("sqlite3", "test.db")
-	if err != nil {
-		panic("failed to connect database")
-	}
-	return db
-}
 
-func AutoMigrate(db *gorm.DB){
-	db.AutoMigrate(&Nodes{},&Tokens{},&Labels{},&Actions{},&Logs{})
-}
 
 
 func CloseDB(db *gorm.DB) {
@@ -48,4 +45,14 @@ func CloseDB(db *gorm.DB) {
 	if err != nil{
 		panic(err)
 	}
+}
+
+func Setup() {
+	var err error
+	db, err = gorm.Open("sqlite3", "../db.sqlite3")
+	if err != nil {
+		panic("failed to connect database")
+	}
+	db.AutoMigrate(&Model{},&Nodes{},&Tokens{},&Labels{},&Actions{},&Logs{})
+
 }

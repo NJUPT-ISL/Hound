@@ -25,9 +25,9 @@ func InitRouter(token *tokens.Token) *gin.Engine {
 		imageGroup.POST("/pull", api.PostImagePull)
 		imageGroup.POST("/remove", api.PostImageRemove)
 	}
-	tokenGroup := router.Group("/token")
-	{
-		tokenGroup.GET("/refresh", api.GetRefresh)
-	}
+	//tokenGroup := router.Group("/token")
+	//{
+	//	tokenGroup.GET("/refresh", api.GetRefresh)
+	//}
 	return router
 }

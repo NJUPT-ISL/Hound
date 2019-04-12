@@ -1,14 +1,18 @@
 package routers
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"../api"
+	)
 
 func InitRouter() *gin.Engine {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
-	masterGroup := router.Group("/image")
+	nodesGroup := router.Group("/nodes")
 	{
-		masterGroup.GET("test",)
+		nodesGroup.POST("join",api.PostJoin)
+		nodesGroup.GET("list",api.GetList)
 	}
 	return router
 }

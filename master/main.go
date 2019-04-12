@@ -2,6 +2,7 @@ package main
 
 import  (
 	"./routers"
+	"./models"
 	"github.com/gin-gonic/gin"
 	"io"
 	"os"
@@ -9,8 +10,10 @@ import  (
 
 
 func main() {
+	// Init Databases
+	models.Setup()
 	// Disable Debug mode
-	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode(gin.ReleaseMode)
 	// Enable Logs
 	gin.DisableConsoleColor()
 	f, err := os.Create("log/master.log")
@@ -20,5 +23,6 @@ func main() {
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
 	r := routers.InitRouter()
+
 	_ = r.RunTLS(":8080","pem/server.crt","pem/server.key") // listen and serve on 0.0.0.0:8080
 }
