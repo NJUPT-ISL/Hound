@@ -15,10 +15,7 @@ type Model struct {
 	DeletedOn  int `json:"deleted_on"`
 }
 
-type Tokens struct {
-	HostName string `gorm:"unique;not null"`
-	Token string
-}
+
 
 type Labels struct {
 	HostName string `gorm:"unique;not null"`

@@ -6,11 +6,10 @@ import (
 	"log"
 )
 
-
-func PostNodeJoin(c *gin.Context){
+func SendToken(c *gin.Context){
 	Hostname := c.PostForm("Host")
-	Role := c.PostForm("Role")
-	if err := models.NodesCreate(Hostname,Role ); err != nil {
+	Token := c.PostForm("Token")
+	if err := models.TokenCreate(Hostname,Token); err != nil {
 		c.JSON(200,gin.H{
 			"state": "failed",
 		})
@@ -18,12 +17,12 @@ func PostNodeJoin(c *gin.Context){
 		c.JSON(200,gin.H{
 			"state": "ok",
 		})
-		log.Printf("New Node joined,HostName:"+Hostname+" Role:"+Role)
+		log.Printf("Get Node Token,HostName: "+Hostname+" Token:"+Token)
 	}
 }
 
-func GetNodeList(c *gin.Context){
-	list,err := models.NodeList()
+func GetTokenList(c *gin.Context){
+	list,err := models.TokenList()
 	if err != nil{
 		c.JSON(200,gin.H{
 			"message":"failed",

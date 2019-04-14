@@ -12,6 +12,7 @@ import (
 
 
 func main() {
+
 	lib.SendJoin()
 	// Disable Debug mode
 	//gin.SetMode(gin.ReleaseMode)
@@ -21,11 +22,13 @@ func main() {
 	token := tokens.Token{}
 	token.GenerateToken()
 	log.Printf("The Hound Agent token is:"+token.GetToken())
+	//Send Token
+	lib.SendToken(token.GetToken())
 	f, err := os.Create("log/agent.log")
 	if err != nil{
 		panic(err)
 	}
-	Addr := ":8080"
+	Addr := ":8081"
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	log.Printf("Hound Service Agent is running at"+Addr)
 	r := routers.InitRouter(&token)

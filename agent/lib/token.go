@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func SendJoin(){
+func SendToken(token string){
 	config := tls.Config{
 		InsecureSkipVerify:true,
 	}
@@ -21,10 +21,10 @@ func SendJoin(){
 	}
 	client := &http.Client{Transport: tr}
 	_, err := client.PostForm(
-		"https://"+os.Getenv("MasterUrl")+"/nodes/join",
-		url.Values{"Host": {os.Getenv("hostname")}, "Role": {"agent"}})
+		"https://"+os.Getenv("MasterUrl")+"/tokens/send",
+		url.Values{"Host": {os.Getenv("hostname")}, "Token": {token}})
 	if err != nil {
-		log.Printf("Send Join message failed.")
+		log.Printf("Send Token message failed.")
 		panic(err)
 	}
 }

@@ -11,8 +11,13 @@ func InitRouter() *gin.Engine {
 	router.Use(gin.Recovery())
 	nodesGroup := router.Group("/nodes")
 	{
-		nodesGroup.POST("join",api.PostJoin)
-		nodesGroup.GET("list",api.GetList)
+		nodesGroup.POST("join",api.PostNodeJoin)
+		nodesGroup.GET("list",api.GetNodeList)
+	}
+	tokensGroup := router.Group("/tokens")
+	{
+		tokensGroup.POST("send",api.SendToken)
+		tokensGroup.GET("list",api.GetTokenList)
 	}
 	return router
 }
