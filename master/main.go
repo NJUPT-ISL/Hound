@@ -13,7 +13,7 @@ func main() {
 	// Init Databases
 	models.Setup()
 	// Disable Debug mode
-	//gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 	// Enable Logs
 	gin.DisableConsoleColor()
 	f, err := os.Create("log/master.log")
