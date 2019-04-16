@@ -7,13 +7,19 @@ import (
 type Nodes struct {
 	HostName string `gorm:"PRIMARY_KEY;unique;not null"`
 	Role string `gorm:"size:255"`
+	KernelVersion string
+	OperatingSystem string
+	DockerVersion string
 	JoinTime time.Time
 }
 
-func NodesCreate(hostname string, role string) error{
+func NodesCreate(hostname string, role string, kv string, os string,dv string) error{
 	node := Nodes{
 		HostName:hostname,
 		Role:role,
+		KernelVersion: kv,
+		OperatingSystem: os,
+		DockerVersion: dv,
 		JoinTime:time.Now(),
 	}
 	if err := db.Create(&node).Error;err != nil {
@@ -38,10 +44,10 @@ func NodeQuery(hostname string)(*Nodes,error){
 	}
 }
 
-func NodesUpdate (hostname string,role string) error {
+func NodesUpdate (hostname string,role string, kv string, os string,dv string) error {
 	err,ok := NodeCheck(hostname)
 	if ok {
-		if err := db.Where("hostname = ?",hostname).First(&Nodes{}).Update(hostname,role,time.Now()).Error; err != nil {
+		if err := db.Where("hostname = ?",hostname).First(&Nodes{}).Update(hostname,role,kv,os,dv,time.Now()).Error; err != nil {
 			return err
 		} else {
 			return nil

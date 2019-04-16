@@ -8,9 +8,12 @@ import (
 
 
 func PostNodeJoin(c *gin.Context){
-	Hostname := c.PostForm("Host")
-	Role := c.PostForm("Role")
-	if err := models.NodesCreate(Hostname,Role ); err != nil {
+	if err := models.NodesCreate(c.PostForm("Host"),
+		c.PostForm("Role"),
+		c.PostForm("kv"),
+		c.PostForm("os"),
+		c.PostForm("dv")); err != nil {
+			log.Printf("Create Node Error: "+c.PostForm("Host"))
 		c.JSON(200,gin.H{
 			"state": "failed",
 		})
@@ -18,7 +21,7 @@ func PostNodeJoin(c *gin.Context){
 		c.JSON(200,gin.H{
 			"state": "ok",
 		})
-		log.Printf("New Node joined,HostName:"+Hostname+" Role:"+Role)
+		log.Printf("New Node joined,HostName:"+c.PostForm("Host")+" Role:"+c.PostForm("Role"))
 	}
 }
 

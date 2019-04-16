@@ -10,6 +10,10 @@ import (
 )
 
 func SendJoin(){
+	info, err := DockerInfo()
+	if err != nil{
+		panic(err)
+	}
 	config := tls.Config{
 		InsecureSkipVerify:true,
 	}
@@ -20,9 +24,14 @@ func SendJoin(){
 		TLSClientConfig: &config,
 	}
 	client := &http.Client{Transport: tr}
-	_, err := client.PostForm(
+	_, err = client.PostForm(
 		"https://"+os.Getenv("MasterUrl")+"/nodes/join",
-		url.Values{"Host": {os.Getenv("hostname")}, "Role": {"agent"}})
+		url.Values{"Host": {os.Getenv("hostname")},
+			"Role": {"agent"},
+			"kv":{info.KernelVersion},
+			"os":{info.OperatingSystem},
+			"dv":{info.ServerVersion},
+		})
 	if err != nil {
 		log.Printf("Send Join message failed.")
 		panic(err)
