@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/robfig/cron"
 	"./lib"
 	"./routers"
 	"./tokens"
@@ -13,7 +14,17 @@ import (
 
 func main() {
 
+	// Set cron
+	cronJob := cron.New()
+	spec := "*/5 * * * * ?"
+	if err := cronJob.AddFunc(spec, func() {
+		lib.SendUpdate()
+	}) ; err != nil {
+		panic(err)
+	}
+
 	lib.SendJoin()
+	cronJob.Start()
 	// Disable Debug mode
 	//gin.SetMode(gin.ReleaseMode)
 	// Enable Logs

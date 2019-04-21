@@ -30,6 +30,7 @@ func InitRouter() *gin.Engine {
 	{
 		nodesGroup.POST("join",api.PostNodeJoin)
 		nodesGroup.GET("list",api.GetNodeList)
+		nodesGroup.POST("update", api.PostNodeUpdate)
 	}
 	tokensGroup := router.Group("/tokens")
 	{
