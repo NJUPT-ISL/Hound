@@ -26,7 +26,8 @@ func PostNodeJoin(c *gin.Context){
 }
 
 func PostNodeUpdate(c *gin.Context){
-	if err := models.NodesCreate(c.PostForm("Host"),
+	if err := models.NodesUpdate(
+		c.PostForm("Host"),
 		c.PostForm("Role"),
 		c.PostForm("kv"),
 		c.PostForm("os"),
@@ -39,7 +40,7 @@ func PostNodeUpdate(c *gin.Context){
 		c.JSON(200,gin.H{
 			"state": "ok",
 		})
-		log.Printf("New Node joined,HostName:"+c.PostForm("Host")+" Role:"+c.PostForm("Role"))
+		log.Printf("Node: " +c.PostForm("Host")+ " Updated, Role:"+c.PostForm("Role"))
 	}
 }
 

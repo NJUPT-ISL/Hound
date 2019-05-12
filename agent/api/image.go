@@ -79,4 +79,3 @@ func PostImageRemove(c *gin.Context){
 		"message":"OK",
 	})
 }
-
