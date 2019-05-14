@@ -34,9 +34,6 @@ type Logs struct {
 	Node string
 }
 
-
-
-
 func CloseDB(db *gorm.DB) {
 	err := db.Close()
 	if err != nil{
@@ -48,7 +45,7 @@ func Setup() {
 	var err error
 	db, err = gorm.Open("sqlite3", "../db.sqlite3")
 	if err != nil {
-		panic("failed to connect database")
+		panic("Failed to connect database!")
 	}
 	db.AutoMigrate(&Model{},&Nodes{},&Tokens{},&Labels{},&Actions{},&Logs{})
 

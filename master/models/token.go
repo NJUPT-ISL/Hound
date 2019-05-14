@@ -6,6 +6,7 @@ type Tokens struct {
 	HostName string `gorm:"unique;not null"`
 	Token string
 	GenerateTime time.Time
+	UpdateTime time.Time
 }
 
 func TokenCreate(hostname string, token string) error {
@@ -13,22 +14,24 @@ func TokenCreate(hostname string, token string) error {
 		HostName:hostname,
 		Token:token,
 		GenerateTime:time.Now(),
+		UpdateTime:time.Now(),
 	}
 	if err := db.Create(&t).Error;err != nil {
 		return err
 	}
 	return nil
 }
+
 func TokenCheck(hostname string) (error,bool){
-	if err := db.Where("hostname = ?",hostname).First(&Tokens{}).Error;err != nil {
-		return err,true
+	if err := db.Where("host_name = ?",hostname).First(&Tokens{}).Error;err != nil {
+		return err,false
 	}
-	return nil,false
+	return nil,true
 }
 
 func TokenQuery(hostname string)(*Tokens,error){
 	t := Tokens{}
-	if err := db.Where("hostname = ?",hostname).First(&t).Error;err != nil{
+	if err := db.Where("host_name = ?",hostname).First(&t).Error;err != nil{
 		return nil,err
 	} else {
 		return &t, nil
@@ -38,7 +41,11 @@ func TokenQuery(hostname string)(*Tokens,error){
 func TokenUpdate (hostname string,token string) error {
 	err,ok := TokenCheck(hostname)
 	if ok {
-		if err := db.Where("hostname = ?",hostname).First(&Tokens{}).Update(hostname,token,time.Now()).Error; err != nil {
+		if err := db.Where("host_name = ?",hostname).First(&Tokens{}).Updates(
+			map[string]interface{}{
+				"HostName": hostname,
+				"Token": token,
+				"UpdateTime": time.Now()}).Error; err != nil {
 			return err
 		} else {
 			return nil
@@ -51,7 +58,7 @@ func TokenUpdate (hostname string,token string) error {
 func TokenDelete (hostname string) error {
 	err,ok := NodeCheck(hostname)
 	if ok {
-		if err := db.Where("hostname = ?",hostname).First(&Tokens{}).Delete(&Nodes{}).Error; err != nil{
+		if err := db.Where("host_name = ?",hostname).First(&Tokens{}).Delete(&Nodes{}).Error; err != nil{
 			return err
 		} else {
 			return nil

@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/master/operations/operations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/api/image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/api/image.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/api/nodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/api/nodes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/log/master.log" beforeDir="false" afterPath="$PROJECT_DIR$/master/log/master.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/models/nodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/nodes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master/models/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master/models/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/token.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,11 +92,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master/models/model.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="965">
+              <caret line="44" column="17" lean-forward="true" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
               <folding>
                 <element signature="e#16#104#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/master/models/token.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1694">
+              <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -118,23 +119,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/master/models/nodes.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
-              <folding>
-                <element signature="e#16#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/master/api/token.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
               <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/master/models/nodes.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+              <folding>
+                <element signature="e#16#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,8 +166,6 @@
         <option value="$PROJECT_DIR$/agent/tokens/token_test.go" />
         <option value="$PROJECT_DIR$/agent/api/token.go" />
         <option value="$PROJECT_DIR$/agent/middlewares/middleware.go" />
-        <option value="$PROJECT_DIR$/master/models/model.go" />
-        <option value="$PROJECT_DIR$/master/models/token.go" />
         <option value="$PROJECT_DIR$/agent/lib/token.go" />
         <option value="$PROJECT_DIR$/master/api/token.go" />
         <option value="$PROJECT_DIR$/agent/routers/router.go" />
@@ -181,12 +180,14 @@
         <option value="$PROJECT_DIR$/master/operations/operations.go" />
         <option value="$PROJECT_DIR$/master/api/nodes.go" />
         <option value="$PROJECT_DIR$/master/models/nodes.go" />
+        <option value="$PROJECT_DIR$/master/models/token.go" />
+        <option value="$PROJECT_DIR$/master/models/model.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1987" />
-    <option name="y" value="363" />
+    <option name="x" value="2123" />
+    <option name="y" value="354" />
     <option name="width" value="2009" />
     <option name="height" value="1236" />
   </component>
@@ -395,7 +396,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1987" y="363" width="2009" height="1236" extended-state="0" />
+    <frame x="2123" y="354" width="2009" height="1236" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27300456" />
@@ -689,13 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master/models/token.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/Cellar/go/1.11.4/libexec/src/net/url/url.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -755,16 +749,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/master/models/model.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#16#104#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/agent/lib/send.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="671">
@@ -809,13 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/agent/routers/router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/go/src/github.com/jinzhu/gorm/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -830,13 +807,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/agent/routers/router.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/master/models/nodes.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="22">
+          <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
           <folding>
             <element signature="e#16#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/models/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="965">
+          <caret line="44" column="17" lean-forward="true" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+          <folding>
+            <element signature="e#16#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/master/models/token.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1694">
+          <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
         </state>
       </provider>
     </entry>
