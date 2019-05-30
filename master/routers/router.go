@@ -37,5 +37,11 @@ func InitRouter() *gin.Engine {
 		tokensGroup.POST("send",api.SendToken)
 		tokensGroup.GET("list",api.GetTokenList)
 	}
+	operationsGroup := router.Group("/operations")
+	{
+		operationsGroup.POST("prune", api.PostNodePrune)
+		operationsGroup.POST("pull", api.PostNodePullImage)
+		operationsGroup.POST("remove", api.PostNodeRemoveImage)
+	}
 	return router
 }

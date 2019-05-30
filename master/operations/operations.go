@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"strings"
 	"time"
+	"../models"
 )
 
 func PostOperations(Method string,NodeName string,token string,images []string){
@@ -58,15 +59,27 @@ func GetOperations(Method string,NodeName string,token string){
 	}
 }
 
-func Pull(NodeName string,token string,images []string){
-	PostOperations("pull", NodeName, token, images)
+func Pull(NodeName string,images []string){
+	token,err := models.TokenQuery(NodeName)
+	if err != nil{
+		panic(err)
+	}
+	PostOperations("pull", NodeName, token.Token, images)
 }
 
-func Remove(NodeName string,token string,images []string){
-	PostOperations("remove", NodeName, token, images)
+func Remove(NodeName string,images []string){
+	token,err := models.TokenQuery(NodeName)
+	if err != nil{
+		panic(err)
+	}
+	PostOperations("remove", NodeName, token.Token, images)
 }
 
-func Prune(NodeName string,token string){
-	GetOperations("prune", NodeName, token)
+func Prune(NodeName string){
+	token,err := models.TokenQuery(NodeName)
+	if err != nil{
+		panic(err)
+	}
+	GetOperations("prune", NodeName, token.Token)
 }
 

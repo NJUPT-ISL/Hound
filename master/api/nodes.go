@@ -45,7 +45,7 @@ func PostNodeUpdate(c *gin.Context){
 }
 
 func GetNodeList(c *gin.Context){
-	list,err := models.NodeList()
+	list, err := models.NodeList()
 	if err != nil{
 		c.JSON(200,gin.H{
 			"message":"failed",
