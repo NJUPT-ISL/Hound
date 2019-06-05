@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="" />
+    <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/lib/docker-image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/docker-image.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,8 +119,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/agent/lib/docker-image.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="899">
-              <caret line="107" column="5" lean-forward="true" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
+            <state relative-caret-position="798">
+              <caret line="112" selection-start-line="112" selection-end-line="112" />
               <folding>
                 <element signature="e#13#189#0" expanded="true" />
               </folding>
@@ -147,7 +150,6 @@
         <option value="$PROJECT_DIR$/agent/operators/operator-image.go" />
         <option value="$PROJECT_DIR$/agent/api/operator-image.go" />
         <option value="$PROJECT_DIR$/agent/api/system.go" />
-        <option value="$PROJECT_DIR$/agent/lib/docker-image.go" />
         <option value="$PROJECT_DIR$/agent/lib/docker-image_test.go" />
         <option value="$PROJECT_DIR$/agent/tokens/token_test.go" />
         <option value="$PROJECT_DIR$/agent/api/token.go" />
@@ -169,10 +171,11 @@
         <option value="$PROJECT_DIR$/master/api/nodes.go" />
         <option value="$PROJECT_DIR$/master/api/operations.go" />
         <option value="$PROJECT_DIR$/master/routers/router.go" />
+        <option value="$PROJECT_DIR$/agent/lib/docker-image.go" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="1737" />
     <option name="y" value="290" />
     <option name="width" value="2009" />
@@ -184,7 +187,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,6 +254,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,10 +380,9 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1737" y="290" width="2009" height="1236" extended-state="1" />
-    <editor active="true" />
+    <frame x="1737" y="290" width="2009" height="1236" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3029995" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30604982" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -393,7 +395,7 @@
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="REST Client" order="9" weight="0.3376344" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49923742" weight="0.18444055" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49923742" visible="true" weight="0.18444055" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5007626" side_tool="true" weight="0.18444055" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -814,8 +816,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/lib/docker-image.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="899">
-          <caret line="107" column="5" lean-forward="true" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
+        <state relative-caret-position="798">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
           <folding>
             <element signature="e#13#189#0" expanded="true" />
           </folding>
