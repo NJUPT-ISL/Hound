@@ -9,21 +9,26 @@ import (
 
 func TokenRequestMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		key := c.GetHeader("Hound_Key")
-		log.Printf(key)
-		if key == os.Getenv("Hound_Key")  {
-			c.JSON(200,gin.H{
-				"token":T.GetToken(),
-			})
-			c.Abort()
-			return
+		if key := c.GetHeader("Hound_Key");key != "" {
+			if key == os.Getenv("Hound_Key")  {
+				log.Printf("Get Hound Key: "+key)
+				c.JSON(200,gin.H{
+					"token":T.GetToken(),
+				})
+				c.Abort()
+				return
+			}else {
+				log.Printf("Get Hound Key: "+key)
+				c.JSON(401,gin.H{
+					"message":"Authentication failed",
+				})
+				c.Abort()
+				return
+			}
 		}else {
-			c.JSON(401,gin.H{
-				"message":"Authentication failed",
-			})
-			c.Abort()
-			return
+			c.Next()
 		}
+
 	}
 }
 
@@ -51,15 +56,18 @@ func TokenAuthMiddleware(T *tokens.Token) gin.HandlerFunc {
 
 func TokenRefreshMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		action := c.GetHeader("refresh")
-		if action == "true" {
-			T.RefreshToken()
-			c.JSON(200,gin.H{
-				"token": T.GetToken(),
-			})
-			log.Printf("The new token is: "+T.GetToken())
-			c.Abort()
-			return
+		if action := c.GetHeader("refresh");action != ""{
+			if action == "true" {
+				T.RefreshToken()
+				c.JSON(200,gin.H{
+					"token": T.GetToken(),
+				})
+				log.Printf("The new token is: "+T.GetToken())
+				c.Abort()
+				return
+			}else {
+				c.Next()
+			}
 		}else {
 			c.Next()
 		}

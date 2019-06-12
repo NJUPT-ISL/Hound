@@ -15,6 +15,7 @@ It is mainly used for the management and pruning of container images in a contai
 - Periodically update the image
 
 ### Development log
+- Date: 6.12.2019 Add function of Node Operations.
 - Date: 4.16.2019 Upgrade Node Join features.
 - Date: 4.15.2019 Upgrade custom logs features.
 - Date: 4.14.2019 Add initialization process for master & agent.

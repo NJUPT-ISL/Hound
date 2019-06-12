@@ -1,3 +1,1 @@
-[Hound Agent]127.0.0.1 - [Wed, 12 Jun 2019 16:32:16 CST] "GET /image/info HTTP/1.1 200 13.660512ms "PostmanRuntime/7.11.0" "
-[Hound Agent]::1 - [Wed, 12 Jun 2019 16:32:36 CST] "POST /image/pull HTTP/1.1 200 64.524µs "Go-http-client/1.1" "
-[Hound Agent]::1 - [Wed, 12 Jun 2019 16:35:54 CST] "POST /image/remove HTTP/1.1 200 60.287µs "Go-http-client/1.1" "
+[Hound Agent]127.0.0.1 - [Wed, 12 Jun 2019 16:59:47 CST] "GET /image/info HTTP/1.1 200 19.395707ms "PostmanRuntime/7.11.0" "

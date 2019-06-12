@@ -30,7 +30,7 @@ func InitRouter(token *tokens.Token) *gin.Engine {
 
 	// Enable Token
 	router.Use(
-		//middlewares.TokenRequestMiddleware(token),
+		middlewares.TokenRequestMiddleware(token),
 		middlewares.TokenAuthMiddleware(token),
 		middlewares.TokenRefreshMiddleware(token))
 	imageGroup := router.Group("/image")
