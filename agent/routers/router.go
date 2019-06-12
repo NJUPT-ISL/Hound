@@ -29,16 +29,19 @@ func InitRouter(token *tokens.Token) *gin.Engine {
 	router.Use(gin.Recovery())
 
 	// Enable Token
-	router.Use(middlewares.TokenRequestMiddleware(token),middlewares.TokenAuthMiddleware(token),middlewares.TokenRefreshMiddleware(token))
+	router.Use(
+		//middlewares.TokenRequestMiddleware(token),
+		middlewares.TokenAuthMiddleware(token),
+		middlewares.TokenRefreshMiddleware(token))
 	imageGroup := router.Group("/image")
 	{
 		// Get Action
-		imageGroup.GET("/list", api.GetImageList)
-		imageGroup.GET("/info", api.GetDockerInfo)
-		imageGroup.GET("/prune",api.GetImagePrune)
+		imageGroup.GET("list", api.GetImageList)
+		imageGroup.GET("info", api.GetDockerInfo)
+		imageGroup.GET("prune",api.GetImagePrune)
 		// Post Action
-		imageGroup.POST("/pull", api.PostImagePull)
-		imageGroup.POST("/remove", api.PostImageRemove)
+		imageGroup.POST("pull", api.PostImagePull)
+		imageGroup.POST("remove", api.PostImageRemove)
 	}
 	//tokenGroup := router.Group("/token")
 	//{

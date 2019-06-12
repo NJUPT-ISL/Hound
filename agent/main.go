@@ -16,7 +16,7 @@ func main() {
 
 	// Set cron
 	cronJob := cron.New()
-	spec := "*/5 * * * * ?"
+	spec := "* */5 * * * ?"
 	if err := cronJob.AddFunc(spec, func() {
 		lib.SendUpdate()
 	}) ; err != nil {
@@ -44,5 +44,5 @@ func main() {
 	log.Printf("Hound Service Agent is running at"+Addr)
 	go cronJob.Start()
 	r := routers.InitRouter(&token)
-	_ = r.RunTLS(Addr,"pem/server.crt","pem/server.key") // listen and serve on 0.0.0.0:8080
+	_ = r.RunTLS(Addr,"pem/server.crt","pem/server.key") // listen and serve on 0.0.0.0:8081
 }

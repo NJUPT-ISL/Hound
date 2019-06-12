@@ -24,7 +24,7 @@ func PostOperations(Method string,NodeName string,token string,images []string){
 	for _,image := range images{
 		data.Add("imageName",image)
 	}
-	req, err := http.NewRequest("POST", "https://"+NodeName+"/image/"+Method, strings.NewReader(data.Encode()))
+	req, err := http.NewRequest("POST", "https://"+NodeName+":8081/image/"+Method, strings.NewReader(data.Encode()))
 	if err != nil {
 		panic(err)
 	}
@@ -47,7 +47,7 @@ func GetOperations(Method string,NodeName string,token string){
 		TLSClientConfig: &config,
 	}
 	client := &http.Client{Transport: tr}
-	req, err := http.NewRequest("POST", "https://"+NodeName+"/image/"+Method, nil)
+	req, err := http.NewRequest("POST", "https://"+NodeName+":8081/image/"+Method, nil)
 	if err != nil {
 		panic(err)
 	}
