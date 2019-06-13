@@ -57,6 +57,7 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 	}
 	return out, err
 }
+
 func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem, error) {
 	defer func() {
 		if err := recover() ; err!= nil{
