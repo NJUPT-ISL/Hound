@@ -16,12 +16,6 @@ type Model struct {
 }
 
 
-
-type Labels struct {
-	HostName string `gorm:"unique;not null"`
-	Label string
-}
-
 type Actions struct {
 	Time time.Time
 	Context string

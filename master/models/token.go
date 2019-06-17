@@ -38,7 +38,7 @@ func TokenQuery(hostname string)(*Tokens,error){
 	}
 }
 
-func TokenUpdate (hostname string,token string) error {
+func TokenUpdate(hostname string,token string) error {
 	err,ok := TokenCheck(hostname)
 	if ok {
 		if err := db.Where("host_name = ?",hostname).First(&Tokens{}).Updates(
@@ -55,7 +55,7 @@ func TokenUpdate (hostname string,token string) error {
 	}
 }
 
-func TokenDelete (hostname string) error {
+func TokenDelete(hostname string) error {
 	err,ok := NodeCheck(hostname)
 	if ok {
 		if err := db.Where("host_name = ?",hostname).First(&Tokens{}).Delete(&Nodes{}).Error; err != nil{
