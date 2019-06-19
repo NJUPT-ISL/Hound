@@ -8,21 +8,31 @@ import (
 
 
 func PostNodeJoin(c *gin.Context){
-	if err := models.NodesCreate(c.PostForm("Host"),
-		c.PostForm("Role"),
-		c.PostForm("kv"),
-		c.PostForm("os"),
-		c.PostForm("dv")); err != nil {
+
+	if _,ok := models.NodeCheck(c.PostForm("Host"));ok != true{
+		if err := models.NodesCreate(c.PostForm("Host"),
+			c.PostForm("Role"),
+			c.PostForm("kv"),
+			c.PostForm("os"),
+			c.PostForm("dv")); err != nil {
 			log.Printf("Create Node Error: "+c.PostForm("Host"))
-		c.JSON(200,gin.H{
-			"state": "failed",
-		})
-	} else {
+			c.JSON(200,gin.H{
+				"state": "failed",
+			})
+		} else {
+			c.JSON(200,gin.H{
+				"state": "ok",
+			})
+			log.Printf("New Node joined,HostName: "+c.PostForm("Host")+" Role: "+c.PostForm("Role")+".")
+		}
+	}else {
 		c.JSON(200,gin.H{
 			"state": "ok",
 		})
-		log.Printf("New Node joined,HostName:"+c.PostForm("Host")+" Role:"+c.PostForm("Role"))
+		log.Printf("Node "+c.PostForm("Host")+"already exists,and does not need to send a join message.")
 	}
+
+
 }
 
 func PostNodeUpdate(c *gin.Context){

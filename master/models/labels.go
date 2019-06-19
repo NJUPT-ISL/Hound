@@ -23,11 +23,12 @@ func LabelCheck(labelname string) (error,bool){
 	return nil,true
 }
 
-func LabelQuery(labelname string)(*Labels,error){
-	label := Labels{}
-	if err := db.Where("label = ?",labelname).First(&label).Error;err != nil{
+func LabelQuery(labelname string)([] *Labels,error){
+	var labels [] *Labels
+	if err := db.Where("label = ?",labelname).Find(&labels).Error;err != nil{
 		return nil,err
 	} else {
-		return &label, nil
+		return labels, nil
 	}
 }
+

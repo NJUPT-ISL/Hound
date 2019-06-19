@@ -1,12 +1,12 @@
 package operations
 
 import (
+	"../models"
 	"crypto/tls"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
-	"../models"
 )
 
 func PostOperations(Method string,NodeName string,token string,images []string){
