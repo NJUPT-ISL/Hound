@@ -32,3 +32,16 @@ func LabelQuery(labelname string)([] *Labels,error){
 	}
 }
 
+func LabelDelete (labelname string) error {
+	var labels [] *Labels
+	err,ok := LabelCheck(labelname)
+	if ok {
+		if err := db.Where("label = ?",labelname).Find(&labels).Delete(&labels).Error; err != nil{
+			return err
+		} else {
+			return nil
+		}
+	} else {
+		return err
+	}
+}
