@@ -45,3 +45,16 @@ func LabelDelete (labelname string) error {
 		return err
 	}
 }
+func LabelList (labelname string) ([] *string,error){
+	var nodelist [] *string
+	err,ok := LabelCheck(labelname)
+	if ok {
+		if err := db.Select("hostname").Where("label = ?",labelname).Find(&nodelist).Error;err != nil{
+			return nil,err
+		}else {
+			return nodelist,nil
+		}
+	}else {
+		return nil,err
+	}
+}
