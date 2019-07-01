@@ -29,7 +29,7 @@ func PostNodeJoin(c *gin.Context){
 		c.JSON(200,gin.H{
 			"state": "ok",
 		})
-		log.Printf("Node "+c.PostForm("Host")+"already exists,and does not need to send a join message.")
+		log.Printf("Node "+c.PostForm("Host")+" already exists,and does not need to send a join message.")
 	}
 
 

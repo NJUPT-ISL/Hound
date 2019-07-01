@@ -1,16 +1,16 @@
 package models
 
 type Labels struct {
-	HostName string `gorm:"unique;not null"`
+	Node string `gorm:"not null;unique"`
 	Label string
 }
 
-func LabelCreate(hostname string, labelname string) error{
-	label := Labels{
-		HostName:hostname,
-		Label:labelname,
+func LabelCreate(node string, labelName string) error{
+	L := Labels{
+		Node:node,
+		Label:labelName,
 	}
-	if err := db.Create(&label).Error;err != nil {
+	if err := db.Create(&L).Error;err != nil {
 		return err
 	}
 	return nil
@@ -31,7 +31,6 @@ func LabelQuery(labelname string)([] *Labels,error){
 		return labels, nil
 	}
 }
-
 func LabelDelete (labelname string) error {
 	var labels [] *Labels
 	err,ok := LabelCheck(labelname)
@@ -45,16 +44,25 @@ func LabelDelete (labelname string) error {
 		return err
 	}
 }
-func LabelList (labelname string) ([] *string,error){
-	var nodelist [] *string
+func NodeLabelList (labelname string) ([] *string,error){
+	var nodeList [] *string
 	err,ok := LabelCheck(labelname)
 	if ok {
-		if err := db.Select("hostname").Where("label = ?",labelname).Find(&nodelist).Error;err != nil{
+		if err := db.Select("node").Where("label = ?",labelname).Find(&nodeList).Error;err != nil{
 			return nil,err
 		}else {
-			return nodelist,nil
+			return nodeList,nil
 		}
 	}else {
 		return nil,err
+	}
+}
+
+func LabelListAll() ([] *Labels,error){
+	var labelList [] *Labels
+	if err := db.Find(&labelList).Error;err != nil{
+		return nil,err
+	}else {
+		return labelList,nil
 	}
 }

@@ -43,5 +43,10 @@ func InitRouter() *gin.Engine {
 		operationsGroup.POST("pull", api.PostNodePullImage)
 		operationsGroup.POST("remove", api.PostNodeRemoveImage)
 	}
+	labelsGroup := router.Group("/labels")
+	{
+		labelsGroup.GET("list",api.GetLabelList)
+		labelsGroup.POST("add",api.PostAddLabel)
+	}
 	return router
 }

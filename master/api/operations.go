@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
 	"../operations"
-	)
+	"github.com/gin-gonic/gin"
+)
 
 func PostNodePrune(c *gin.Context){
 	operations.Prune(c.PostForm("NodeName"))
