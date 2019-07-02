@@ -1,4 +1,0 @@
-[Hound Master]127.0.0.1 - [Mon, 01 Jul 2019 16:56:57 CST] "GET /labels/list HTTP/1.1 200 280.241µs "PostmanRuntime/7.15.0" "
-[Hound Master]127.0.0.1 - [Mon, 01 Jul 2019 16:56:58 CST] "GET /labels/list HTTP/1.1 200 154.601µs "PostmanRuntime/7.15.0" "
-[Hound Master]127.0.0.1 - [Mon, 01 Jul 2019 16:57:14 CST] "POST /labels/add HTTP/1.1 200 2.636533ms "PostmanRuntime/7.15.0" "
-[Hound Master]127.0.0.1 - [Mon, 01 Jul 2019 16:57:16 CST] "GET /labels/list HTTP/1.1 200 195.311µs "PostmanRuntime/7.15.0" "

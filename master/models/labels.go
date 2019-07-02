@@ -1,8 +1,16 @@
 package models
 
 type Labels struct {
-	Node string `gorm:"not null;unique"`
+	Node string
 	Label string
+}
+
+type LabelsList struct {
+	Label string
+}
+
+type NodesList struct {
+	Node string
 }
 
 func LabelCreate(node string, labelName string) error{
@@ -44,11 +52,11 @@ func LabelDelete (labelname string) error {
 		return err
 	}
 }
-func NodeLabelList (labelname string) ([] *string,error){
-	var nodeList [] *string
+func NodeLabelList (labelname string) ([] *NodesList,error){
+	var nodeList [] *NodesList
 	err,ok := LabelCheck(labelname)
 	if ok {
-		if err := db.Select("node").Where("label = ?",labelname).Find(&nodeList).Error;err != nil{
+		if err := db.Table("labels").Select("node").Where("label = ?",labelname).Scan(&nodeList).Error;err != nil{
 			return nil,err
 		}else {
 			return nodeList,nil
@@ -64,5 +72,15 @@ func LabelListAll() ([] *Labels,error){
 		return nil,err
 	}else {
 		return labelList,nil
+	}
+}
+
+func LabelOnlyList() ([] *LabelsList,error) {
+	var list [] *LabelsList
+	if err := db.Table("labels").Select("distinct label").Scan(&list).Error;err != nil{
+		return nil,err
+	}else {
+		print(list)
+		return list,nil
 	}
 }

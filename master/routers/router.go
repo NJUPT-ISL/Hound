@@ -45,8 +45,10 @@ func InitRouter() *gin.Engine {
 	}
 	labelsGroup := router.Group("/labels")
 	{
-		labelsGroup.GET("list",api.GetLabelList)
+		labelsGroup.GET("list",api.GetLabelListAll)
+		labelsGroup.GET("only",api.GetLabelOnlyList)
 		labelsGroup.POST("add",api.PostAddLabel)
+		labelsGroup.POST("node",api.PostLabelNodelist)
 	}
 	return router
 }

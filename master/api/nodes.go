@@ -58,7 +58,7 @@ func GetNodeList(c *gin.Context){
 	list, err := models.NodeList()
 	if err != nil{
 		c.JSON(200,gin.H{
-			"message":"failed",
+			"state":"failed",
 		})
 	} else {
 		c.JSON(200, list)
