@@ -5,11 +5,13 @@ import (
 	"time"
 )
 
+// token struct
 type Token struct {
 	token string
 }
 
 
+// Generate token
 func (T *Token) GenerateToken() {
 	token, err := jwt.NewWithClaims(
 		jwt.SigningMethodES256,
@@ -20,10 +22,12 @@ func (T *Token) GenerateToken() {
 	T.token = token
 }
 
+// Refresh token
 func (T *Token) RefreshToken() {
 	T.GenerateToken()
 }
 
+// check the token
 func (T *Token) VerifyToken(token string) bool {
 	if token == T.token{
 		return true
@@ -32,6 +36,7 @@ func (T *Token) VerifyToken(token string) bool {
 	}
 }
 
+// get the token context
 func (T *Token) GetToken() string {
 	return T.token
 }

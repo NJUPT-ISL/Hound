@@ -7,6 +7,9 @@ import (
 	"os"
 )
 
+
+// If the master send https package with the Hound key header,
+// the agent will response the work token to the master.
 func TokenRequestMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if key := c.GetHeader("Hound_Key");key != "" {
@@ -32,6 +35,7 @@ func TokenRequestMiddleware(T *tokens.Token) gin.HandlerFunc {
 	}
 }
 
+// Check every https package with token header
 func TokenAuthMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.GetHeader("token")
@@ -54,6 +58,8 @@ func TokenAuthMiddleware(T *tokens.Token) gin.HandlerFunc {
 	}
 }
 
+// If the https header contains refresh tag, the agent node
+// will refresh the token.
 func TokenRefreshMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if action := c.GetHeader("refresh");action != ""{

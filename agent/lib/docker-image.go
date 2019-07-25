@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-
+// List all images
 func ListAllImages() ([]types.ImageSummary, error) {
 	defer func() {
 		if err := recover() ; err!= nil{
@@ -29,6 +29,7 @@ func ListAllImages() ([]types.ImageSummary, error) {
 	return images,err
 }
 
+// Pull Docker Images
 func ImagePull(ImageName string) (io.ReadCloser, error) {
 	defer func() {
 		if err := recover() ; err!= nil{
@@ -58,6 +59,7 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 	return out, err
 }
 
+// remove images
 func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem, error) {
 	defer func() {
 		if err := recover() ; err!= nil{
@@ -77,7 +79,7 @@ func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem,
 	return out, err
 }
 
-
+// clean the images in the node that can not be used
 func ImagesPrune() (types.ImagesPruneReport, error) {
 	defer func() {
 		if err := recover() ; err!= nil{
@@ -96,6 +98,7 @@ func ImagesPrune() (types.ImagesPruneReport, error) {
 	return out, err
 }
 
+// show the docker information
 func DockerInfo()  (types.Info, error){
 	defer func() {
 		if err := recover() ; err!= nil{

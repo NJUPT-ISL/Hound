@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// Send Token to the master using TLS
 func SendToken(token string){
 	config := tls.Config{
 		InsecureSkipVerify:true,
@@ -29,6 +30,7 @@ func SendToken(token string){
 	}
 }
 
+// 	Update the agent node information
 func SendUpdate(){
 	info, err := DockerInfo()
 	if err != nil{
@@ -58,6 +60,7 @@ func SendUpdate(){
 	}
 }
 
+// Send the join package to the master
 func SendJoin(){
 	info, err := DockerInfo()
 	if err != nil{
