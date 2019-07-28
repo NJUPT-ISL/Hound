@@ -6,42 +6,42 @@ import (
 	"log"
 )
 
-func SendToken(c *gin.Context){
+func SendToken(c *gin.Context) {
 	Hostname := c.PostForm("Host")
 	Token := c.PostForm("Token")
-	if _,ok := models.TokenCheck(Hostname);!ok {
-		if err := models.TokenCreate(Hostname,Token); err != nil {
-			c.JSON(200,gin.H{
+	if _, ok := models.TokenCheck(Hostname); !ok {
+		if err := models.TokenCreate(Hostname, Token); err != nil {
+			c.JSON(200, gin.H{
 				"state": "failed",
 			})
 		} else {
-			c.JSON(200,gin.H{
+			c.JSON(200, gin.H{
 				"state": "ok",
 			})
-			log.Printf("Get Node Token,HostName: "+Hostname+" Token:"+Token)
+			log.Printf("Get Node Token,HostName: " + Hostname + " Token:" + Token)
 		}
-	}else {
+	} else {
 
-		if err:= models.TokenUpdate(Hostname,Token);err !=nil {
-			c.JSON(200,gin.H{
+		if err := models.TokenUpdate(Hostname, Token); err != nil {
+			c.JSON(200, gin.H{
 				"state": "failed",
 			})
 			panic(err)
-		}else {
-			c.JSON(200,gin.H{
+		} else {
+			c.JSON(200, gin.H{
 				"state": "ok",
 			})
-			log.Printf("Node: "+Hostname+" Token Updated: "+Token)
+			log.Printf("Node: " + Hostname + " Token Updated: " + Token)
 		}
 	}
 
 }
 
-func GetTokenList(c *gin.Context){
-	list,err := models.TokenList()
-	if err != nil{
-		c.JSON(200,gin.H{
-			"state":"failed",
+func GetTokenList(c *gin.Context) {
+	list, err := models.TokenList()
+	if err != nil {
+		c.JSON(200, gin.H{
+			"state": "failed",
 		})
 	} else {
 		c.JSON(200, list)

@@ -11,7 +11,6 @@ import (
 	"os"
 )
 
-
 func main() {
 
 	// Set cron
@@ -19,7 +18,7 @@ func main() {
 	spec := "* */5 * * * ?"
 	if err := cronJob.AddFunc(spec, func() {
 		lib.SendUpdate()
-	}) ; err != nil {
+	}); err != nil {
 		panic(err)
 	}
 
@@ -32,17 +31,17 @@ func main() {
 	// GenerateToken
 	token := tokens.Token{}
 	token.GenerateToken()
-	log.Printf("The Hound Agent token is:"+token.GetToken())
+	log.Printf("The Hound Agent token is:" + token.GetToken())
 	//Send Token
 	lib.SendToken(token.GetToken())
 	f, err := os.Create("log/agent.log")
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	Addr := ":8081"
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-	log.Printf("Hound Service Agent is running at"+Addr)
+	log.Printf("Hound Service Agent is running at" + Addr)
 	go cronJob.Start()
 	r := routers.InitRouter(&token)
-	_ = r.RunTLS(Addr,"pem/server.crt","pem/server.key") // listen and serve on 0.0.0.0:8081
+	_ = r.RunTLS(Addr, "pem/server.crt", "pem/server.key") // listen and serve on 0.0.0.0:8081
 }

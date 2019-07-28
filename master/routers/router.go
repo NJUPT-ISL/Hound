@@ -1,9 +1,9 @@
 package routers
 
 import (
+	"../api"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"../api"
 	"time"
 )
 
@@ -28,14 +28,14 @@ func InitRouter() *gin.Engine {
 	router.Use(gin.Recovery())
 	nodesGroup := router.Group("/nodes")
 	{
-		nodesGroup.POST("join",api.PostNodeJoin)
-		nodesGroup.GET("list",api.GetNodeList)
+		nodesGroup.POST("join", api.PostNodeJoin)
+		nodesGroup.GET("list", api.GetNodeList)
 		nodesGroup.POST("update", api.PostNodeUpdate)
 	}
 	tokensGroup := router.Group("/tokens")
 	{
-		tokensGroup.POST("send",api.SendToken)
-		tokensGroup.GET("list",api.GetTokenList)
+		tokensGroup.POST("send", api.SendToken)
+		tokensGroup.GET("list", api.GetTokenList)
 	}
 	operationsGroup := router.Group("/operations")
 	{
@@ -45,10 +45,10 @@ func InitRouter() *gin.Engine {
 	}
 	labelsGroup := router.Group("/labels")
 	{
-		labelsGroup.GET("list",api.GetLabelListAll)
-		labelsGroup.GET("only",api.GetLabelOnlyList)
-		labelsGroup.POST("add",api.PostAddLabel)
-		labelsGroup.POST("node",api.PostLabelNodelist)
+		labelsGroup.GET("list", api.GetLabelListAll)
+		labelsGroup.GET("only", api.GetLabelOnlyList)
+		labelsGroup.POST("add", api.PostAddLabel)
+		labelsGroup.POST("node", api.PostLabelNodelist)
 	}
 	return router
 }

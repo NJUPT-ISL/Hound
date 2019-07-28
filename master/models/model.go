@@ -15,22 +15,21 @@ type Model struct {
 	DeletedOn  int `json:"deleted_on"`
 }
 
-
 type Actions struct {
-	Time time.Time
+	Time    time.Time
 	Context string
 }
 
 type Logs struct {
-	Types string
-	Time time.Time
+	Types   string
+	Time    time.Time
 	Context string
-	Node string
+	Node    string
 }
 
 func CloseDB(db *gorm.DB) {
 	err := db.Close()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 }
@@ -41,6 +40,6 @@ func Setup() {
 	if err != nil {
 		panic("Failed to connect database!")
 	}
-	db.AutoMigrate(&Model{},&Nodes{},&Tokens{},&Labels{},&Actions{},&Logs{})
+	db.AutoMigrate(&Model{}, &Nodes{}, &Tokens{}, &Labels{}, &Actions{}, &Logs{})
 
 }

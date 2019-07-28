@@ -10,13 +10,12 @@ type Token struct {
 	token string
 }
 
-
 // Generate token
 func (T *Token) GenerateToken() {
 	token, err := jwt.NewWithClaims(
 		jwt.SigningMethodES256,
-		jwt.MapClaims{"Time":time.Now()}).SigningString()
-	if err != nil{
+		jwt.MapClaims{"Time": time.Now()}).SigningString()
+	if err != nil {
 		panic(err)
 	}
 	T.token = token
@@ -29,9 +28,9 @@ func (T *Token) RefreshToken() {
 
 // check the token
 func (T *Token) VerifyToken(token string) bool {
-	if token == T.token{
+	if token == T.token {
 		return true
-	}else {
+	} else {
 		return false
 	}
 }

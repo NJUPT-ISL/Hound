@@ -38,7 +38,7 @@ func InitRouter(token *tokens.Token) *gin.Engine {
 		// Get Action
 		imageGroup.GET("list", api.GetImageList)
 		imageGroup.GET("info", api.GetDockerInfo)
-		imageGroup.GET("prune",api.GetImagePrune)
+		imageGroup.GET("prune", api.GetImagePrune)
 		// Post Action
 		imageGroup.POST("pull", api.PostImagePull)
 		imageGroup.POST("remove", api.PostImageRemove)

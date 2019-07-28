@@ -4,17 +4,15 @@ import (
 	"testing"
 )
 
-
 func TestListAllImages(t *testing.T) {
 	list, err := ListAllImages()
 	if err != nil {
 		panic(err)
 	}
-	for _,image := range list{
-		t.Logf(image.ID,image.RepoDigests,image.RepoTags)
+	for _, image := range list {
+		t.Logf(image.ID, image.RepoDigests, image.RepoTags)
 	}
 }
-
 
 func TestImagePull(t *testing.T) {
 	_, err := ImagePull("alpine")
@@ -24,7 +22,6 @@ func TestImagePull(t *testing.T) {
 	t.Logf("ImagePullPass")
 }
 
-
 func TestImageRemove(t *testing.T) {
 	_, err := ImageRemove("alpine", false)
 	if err != nil {
@@ -33,16 +30,15 @@ func TestImageRemove(t *testing.T) {
 	t.Logf("ImageRemovePass")
 }
 
-
 func TestImagesPrune(t *testing.T) {
-	_,err := ImagesPrune()
+	_, err := ImagesPrune()
 	if err != nil {
 		panic(err)
 	}
 }
 
 func TestDockerInfo(t *testing.T) {
-	info,err := DockerInfo()
+	info, err := DockerInfo()
 	if err != nil {
 		panic(err)
 	}

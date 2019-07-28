@@ -13,7 +13,7 @@ import (
 // List all images
 func ListAllImages() ([]types.ImageSummary, error) {
 	defer func() {
-		if err := recover() ; err!= nil{
+		if err := recover(); err != nil {
 			fmt.Println(err)
 		}
 	}()
@@ -26,13 +26,13 @@ func ListAllImages() ([]types.ImageSummary, error) {
 	if err != nil {
 		panic(err)
 	}
-	return images,err
+	return images, err
 }
 
 // Pull Docker Images
 func ImagePull(ImageName string) (io.ReadCloser, error) {
 	defer func() {
-		if err := recover() ; err!= nil{
+		if err := recover(); err != nil {
 			fmt.Println(err)
 		}
 	}()
@@ -42,7 +42,7 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 	if err != nil {
 		panic(err)
 	}
-	out, err := cli.ImagePull(ctx, ImageName, types.ImagePullOptions{All:false})
+	out, err := cli.ImagePull(ctx, ImageName, types.ImagePullOptions{All: false})
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +53,7 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 		}
 	}()
 	_, ioerr := io.Copy(os.Stdout, out)
-	if err != nil{
+	if err != nil {
 		panic(ioerr)
 	}
 	return out, err
@@ -62,7 +62,7 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 // remove images
 func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem, error) {
 	defer func() {
-		if err := recover() ; err!= nil{
+		if err := recover(); err != nil {
 			fmt.Println(err)
 		}
 	}()
@@ -72,7 +72,7 @@ func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem,
 	if err != nil {
 		panic(err)
 	}
-	out, err := cli.ImageRemove(ctx, ImageName, types.ImageRemoveOptions{Force:Force,})
+	out, err := cli.ImageRemove(ctx, ImageName, types.ImageRemoveOptions{Force: Force})
 	if err != nil {
 		panic(err)
 	}
@@ -82,7 +82,7 @@ func ImageRemove(ImageName string, Force bool) ([]types.ImageDeleteResponseItem,
 // clean the images in the node that can not be used
 func ImagesPrune() (types.ImagesPruneReport, error) {
 	defer func() {
-		if err := recover() ; err!= nil{
+		if err := recover(); err != nil {
 			fmt.Println(err)
 		}
 	}()
@@ -99,9 +99,9 @@ func ImagesPrune() (types.ImagesPruneReport, error) {
 }
 
 // show the docker information
-func DockerInfo()  (types.Info, error){
+func DockerInfo() (types.Info, error) {
 	defer func() {
-		if err := recover() ; err!= nil{
+		if err := recover(); err != nil {
 			fmt.Println(err)
 		}
 	}()
@@ -113,4 +113,3 @@ func DockerInfo()  (types.Info, error){
 	out, err := cli.Info(ctx)
 	return out, err
 }
-

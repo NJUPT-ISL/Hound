@@ -10,15 +10,15 @@ import (
 )
 
 // Send Token to the master using TLS
-func SendToken(token string){
+func SendToken(token string) {
 	config := tls.Config{
-		InsecureSkipVerify:true,
+		InsecureSkipVerify: true,
 	}
 	tr := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    30 * time.Second,
 		DisableCompression: true,
-		TLSClientConfig: &config,
+		TLSClientConfig:    &config,
 	}
 	client := &http.Client{Transport: tr}
 	_, err := client.PostForm(
@@ -31,28 +31,28 @@ func SendToken(token string){
 }
 
 // 	Update the agent node information
-func SendUpdate(){
+func SendUpdate() {
 	info, err := DockerInfo()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	config := tls.Config{
-		InsecureSkipVerify:true,
+		InsecureSkipVerify: true,
 	}
 	tr := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    30 * time.Second,
 		DisableCompression: true,
-		TLSClientConfig: &config,
+		TLSClientConfig:    &config,
 	}
 	client := &http.Client{Transport: tr}
 	_, err = client.PostForm(
 		"https://"+os.Getenv("MasterUrl")+"/nodes/update",
 		url.Values{"Host": {os.Getenv("hostname")},
 			"Role": {"agent"},
-			"kv":{info.KernelVersion},
-			"os":{info.OperatingSystem},
-			"dv":{info.ServerVersion},
+			"kv":   {info.KernelVersion},
+			"os":   {info.OperatingSystem},
+			"dv":   {info.ServerVersion},
 		})
 	if err != nil {
 		log.Printf("Send Join message failed.")
@@ -61,28 +61,28 @@ func SendUpdate(){
 }
 
 // Send the join package to the master
-func SendJoin(){
+func SendJoin() {
 	info, err := DockerInfo()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	config := tls.Config{
-		InsecureSkipVerify:true,
+		InsecureSkipVerify: true,
 	}
 	tr := &http.Transport{
 		MaxIdleConns:       10,
 		IdleConnTimeout:    30 * time.Second,
 		DisableCompression: true,
-		TLSClientConfig: &config,
+		TLSClientConfig:    &config,
 	}
 	client := &http.Client{Transport: tr}
 	_, err = client.PostForm(
 		"https://"+os.Getenv("MasterUrl")+"/nodes/join",
 		url.Values{"Host": {os.Getenv("hostname")},
 			"Role": {"agent"},
-			"kv":{info.KernelVersion},
-			"os":{info.OperatingSystem},
-			"dv":{info.ServerVersion},
+			"kv":   {info.KernelVersion},
+			"os":   {info.OperatingSystem},
+			"dv":   {info.ServerVersion},
 		})
 	if err != nil {
 		log.Printf("Send Join message failed.")
