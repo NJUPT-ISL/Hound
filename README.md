@@ -3,6 +3,10 @@ Hound is a distributed Docker container image management tool.
 It is developed by go with good concurrency and fast speed.
 It is mainly used for the management and pruning of container images in a container cluster.
 
+![Golang](https://img.shields.io/badge/Language%20-go-green)
+![Go Report Card](https://goreportcard.com/badge/github.com/NJUPT-ISL/Hound) 
+
+
 ### Architecture
 
 ![arch](./images/HoundArchitecture.jpg)
