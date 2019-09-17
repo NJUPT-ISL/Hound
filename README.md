@@ -13,7 +13,7 @@ It is mainly used for the management and pruning of container images in a contai
 
 ### Development Environment
 
-- go 1.11
+- go 1.12.9
 - gin 1.3
 
 ### Feature
