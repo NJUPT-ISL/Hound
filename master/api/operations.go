@@ -1,7 +1,7 @@
 package api
 
 import (
-	"../operations"
+	"github.com/NJUPT-ISL/Hound/master/operations"
 	"github.com/gin-gonic/gin"
 )
 

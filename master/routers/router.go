@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"../api"
 	"fmt"
+	"github.com/NJUPT-ISL/Hound/master/api"
 	"github.com/gin-gonic/gin"
 	"time"
 )

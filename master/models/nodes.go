@@ -1,10 +1,12 @@
 package models
 
 import (
+	"github.com/jinzhu/gorm"
 	"time"
 )
 
-type Nodes struct {
+type Node struct {
+	gorm.Model
 	HostName        string `gorm:"PRIMARY_KEY;unique;not null"`
 	Role            string `gorm:"size:255"`
 	KernelVersion   string
@@ -15,7 +17,7 @@ type Nodes struct {
 }
 
 func NodesCreate(hostname string, role string, kv string, os string, dv string) error {
-	node := Nodes{
+	node := Node{
 		HostName:        hostname,
 		Role:            role,
 		KernelVersion:   kv,
@@ -31,14 +33,14 @@ func NodesCreate(hostname string, role string, kv string, os string, dv string) 
 }
 
 func NodeCheck(hostname string) (error, bool) {
-	if err := db.Where("host_name = ?", hostname).First(&Nodes{}).Error; err != nil {
+	if err := db.Where("host_name = ?", hostname).First(&Node{}).Error; err != nil {
 		return err, false
 	}
 	return nil, true
 }
 
-func NodeQuery(hostname string) (*Nodes, error) {
-	node := Nodes{}
+func NodeQuery(hostname string) (*Node, error) {
+	node := Node{}
 	if err := db.Where("host_name = ?", hostname).First(&node).Error; err != nil {
 		return nil, err
 	} else {
@@ -47,7 +49,7 @@ func NodeQuery(hostname string) (*Nodes, error) {
 }
 
 func NodesUpdate(hostname string, role string, kv string, os string, dv string) error {
-	var node = Nodes{}
+	var node = Node{}
 	err, ok := NodeCheck(hostname)
 	if ok {
 		if err = db.Model(&node).Where("host_name = ?", hostname).Updates(
@@ -69,7 +71,7 @@ func NodesUpdate(hostname string, role string, kv string, os string, dv string) 
 func NodeDelete(hostname string) error {
 	err, ok := NodeCheck(hostname)
 	if ok {
-		if err := db.Where("host_name = ?", hostname).First(&Nodes{}).Delete(&Nodes{}).Error; err != nil {
+		if err := db.Where("host_name = ?", hostname).First(&Node{}).Delete(&Node{}).Error; err != nil {
 			return err
 		} else {
 			return nil
@@ -79,8 +81,8 @@ func NodeDelete(hostname string) error {
 	}
 }
 
-func NodeList() ([]*Nodes, error) {
-	var list []*Nodes
+func NodeList() ([]*Node, error) {
+	var list []*Node
 	if err := db.Find(&list).Error; err != nil {
 		return nil, err
 	} else {

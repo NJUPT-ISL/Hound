@@ -1,22 +1,18 @@
 package models
 
-type Labels struct {
-	Node  string
-	Label string
+import (
+	"github.com/jinzhu/gorm"
+)
+
+type Label struct {
+	gorm.Model
+	Name  string
+	Nodes []Node `gorm:"many2many:label_nodes;"`
 }
 
-type LabelsList struct {
-	Label string
-}
-
-type NodesList struct {
-	Node string
-}
-
-func LabelCreate(node string, labelName string) error {
-	L := Labels{
-		Node:  node,
-		Label: labelName,
+func LabelCreate(name string) error {
+	L := Label{
+		Name: name,
 	}
 	if err := db.Create(&L).Error; err != nil {
 		return err
@@ -24,26 +20,27 @@ func LabelCreate(node string, labelName string) error {
 	return nil
 }
 
-func LabelCheck(labelname string) (error, bool) {
-	if err := db.Where("label = ?", labelname).First(&Labels{}).Error; err != nil {
+func LabelCheck(name string) (error, bool) {
+	if err := db.Where("name = ?", name).First(&Label{}).Error; err != nil {
 		return err, false
 	}
 	return nil, true
 }
 
-func LabelQuery(labelname string) ([]*Labels, error) {
-	var labels []*Labels
-	if err := db.Where("label = ?", labelname).Find(&labels).Error; err != nil {
+func LabelQuery(name string) ([]*Label, error) {
+	var labels []*Label
+	if err := db.Where("name = ?", name).Find(&labels).Error; err != nil {
 		return nil, err
 	} else {
 		return labels, nil
 	}
 }
-func LabelDelete(labelname string) error {
-	var labels []*Labels
-	err, ok := LabelCheck(labelname)
+
+func LabelDelete(name string) error {
+	var labels []*Label
+	err, ok := LabelCheck(name)
 	if ok {
-		if err := db.Where("label = ?", labelname).Find(&labels).Delete(&labels).Error; err != nil {
+		if err := db.Where("name = ?", name).Find(&labels).Delete(&labels).Error; err != nil {
 			return err
 		} else {
 			return nil
@@ -52,22 +49,9 @@ func LabelDelete(labelname string) error {
 		return err
 	}
 }
-func NodeLabelList(labelname string) ([]*NodesList, error) {
-	var nodeList []*NodesList
-	err, ok := LabelCheck(labelname)
-	if ok {
-		if err := db.Table("labels").Select("node").Where("label = ?", labelname).Scan(&nodeList).Error; err != nil {
-			return nil, err
-		} else {
-			return nodeList, nil
-		}
-	} else {
-		return nil, err
-	}
-}
 
-func LabelListAll() ([]*Labels, error) {
-	var labelList []*Labels
+func LabelListAll() ([]*Label, error) {
+	var labelList []*Label
 	if err := db.Find(&labelList).Error; err != nil {
 		return nil, err
 	} else {
@@ -75,8 +59,8 @@ func LabelListAll() ([]*Labels, error) {
 	}
 }
 
-func LabelOnlyList() ([]*LabelsList, error) {
-	var list []*LabelsList
+func LabelOnlyList() ([]*Label, error) {
+	var list []*Label
 	if err := db.Table("labels").Select("distinct label").Scan(&list).Error; err != nil {
 		return nil, err
 	} else {

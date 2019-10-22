@@ -1,8 +1,8 @@
 package operations
 
 import (
-	"../models"
 	"crypto/tls"
+	"github.com/NJUPT-ISL/Hound/master/models"
 	"net/http"
 	"net/url"
 	"strings"

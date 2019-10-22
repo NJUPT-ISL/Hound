@@ -15,12 +15,12 @@ type Model struct {
 	DeletedOn  int `json:"deleted_on"`
 }
 
-type Actions struct {
+type Action struct {
 	Time    time.Time
 	Context string
 }
 
-type Logs struct {
+type Log struct {
 	Types   string
 	Time    time.Time
 	Context string
@@ -40,6 +40,6 @@ func Setup() {
 	if err != nil {
 		panic("Failed to connect database!")
 	}
-	db.AutoMigrate(&Model{}, &Nodes{}, &Tokens{}, &Labels{}, &Actions{}, &Logs{})
+	db.AutoMigrate(&Model{}, &Node{}, &Token{}, &Label{}, &Action{}, &Log{})
 
 }

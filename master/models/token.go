@@ -2,16 +2,16 @@ package models
 
 import "time"
 
-type Tokens struct {
-	HostName     string `gorm:"unique;not null"`
+type Token struct {
+	Name         string `gorm:"unique;not null"`
 	Token        string
 	GenerateTime time.Time
 	UpdateTime   time.Time
 }
 
-func TokenCreate(hostname string, token string) error {
-	t := Tokens{
-		HostName:     hostname,
+func TokenCreate(name string, token string) error {
+	t := Token{
+		Name:         name,
 		Token:        token,
 		GenerateTime: time.Now(),
 		UpdateTime:   time.Now(),
@@ -22,28 +22,28 @@ func TokenCreate(hostname string, token string) error {
 	return nil
 }
 
-func TokenCheck(hostname string) (error, bool) {
-	if err := db.Where("host_name = ?", hostname).First(&Tokens{}).Error; err != nil {
+func TokenCheck(name string) (error, bool) {
+	if err := db.Where("name = ?", name).First(&Token{}).Error; err != nil {
 		return err, false
 	}
 	return nil, true
 }
 
-func TokenQuery(hostname string) (*Tokens, error) {
-	t := Tokens{}
-	if err := db.Where("host_name = ?", hostname).First(&t).Error; err != nil {
+func TokenQuery(name string) (*Token, error) {
+	t := Token{}
+	if err := db.Where("name = ?", name).First(&t).Error; err != nil {
 		return nil, err
 	} else {
 		return &t, nil
 	}
 }
 
-func TokenUpdate(hostname string, token string) error {
-	err, ok := TokenCheck(hostname)
+func TokenUpdate(name string, token string) error {
+	err, ok := TokenCheck(name)
 	if ok {
-		if err := db.Where("host_name = ?", hostname).First(&Tokens{}).Updates(
+		if err := db.Where("name = ?", name).First(&Token{}).Updates(
 			map[string]interface{}{
-				"HostName":   hostname,
+				"HostName":   name,
 				"Token":      token,
 				"UpdateTime": time.Now()}).Error; err != nil {
 			return err
@@ -55,21 +55,8 @@ func TokenUpdate(hostname string, token string) error {
 	}
 }
 
-func TokenDelete(hostname string) error {
-	err, ok := NodeCheck(hostname)
-	if ok {
-		if err := db.Where("host_name = ?", hostname).First(&Tokens{}).Delete(&Nodes{}).Error; err != nil {
-			return err
-		} else {
-			return nil
-		}
-	} else {
-		return err
-	}
-}
-
-func TokenList() ([]*Tokens, error) {
-	var list []*Tokens
+func TokenList() ([]*Token, error) {
+	var list []*Token
 	if err := db.Find(&list).Error; err != nil {
 		return nil, err
 	} else {

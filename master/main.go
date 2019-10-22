@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./models"
-	"./routers"
+	"github.com/NJUPT-ISL/Hound/master/models"
+	"github.com/NJUPT-ISL/Hound/master/routers"
 	"github.com/gin-gonic/gin"
 	"io"
 	"os"
