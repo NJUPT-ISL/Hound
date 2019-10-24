@@ -1,13 +1,11 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
 	"time"
 )
 
 type Node struct {
-	gorm.Model
-	HostName        string `gorm:"PRIMARY_KEY;unique;not null"`
+	Name            string `gorm:"PRIMARY_KEY;unique;not null"`
 	Role            string `gorm:"size:255"`
 	KernelVersion   string
 	OperatingSystem string
@@ -16,9 +14,9 @@ type Node struct {
 	UpdateTime      time.Time
 }
 
-func NodesCreate(hostname string, role string, kv string, os string, dv string) error {
+func CreateNode(name string, role string, kv string, os string, dv string) error {
 	node := Node{
-		HostName:        hostname,
+		Name:            name,
 		Role:            role,
 		KernelVersion:   kv,
 		OperatingSystem: os,
@@ -32,27 +30,26 @@ func NodesCreate(hostname string, role string, kv string, os string, dv string) 
 	return nil
 }
 
-func NodeCheck(hostname string) (error, bool) {
-	if err := db.Where("host_name = ?", hostname).First(&Node{}).Error; err != nil {
+func GetNode(name string) (err error, node Node) {
+	n := Node{}
+	if err := db.Where("name = ?", name).First(&n).Error; err != nil {
+		return err, n
+	}
+	return nil, n
+}
+
+func CheckNode(name string) (error, bool) {
+	if err := db.Where("name = ?", name).First(&Node{}).Error; err != nil {
 		return err, false
 	}
 	return nil, true
 }
 
-func NodeQuery(hostname string) (*Node, error) {
-	node := Node{}
-	if err := db.Where("host_name = ?", hostname).First(&node).Error; err != nil {
-		return nil, err
-	} else {
-		return &node, nil
-	}
-}
-
-func NodesUpdate(hostname string, role string, kv string, os string, dv string) error {
+func UpdateNode(name string, role string, kv string, os string, dv string) error {
 	var node = Node{}
-	err, ok := NodeCheck(hostname)
+	err, ok := CheckNode(name)
 	if ok {
-		if err = db.Model(&node).Where("host_name = ?", hostname).Updates(
+		if err = db.Model(&node).Where("name = ?", name).Updates(
 			map[string]interface{}{
 				"Role":            role,
 				"KernelVersion":   kv,
@@ -68,20 +65,7 @@ func NodesUpdate(hostname string, role string, kv string, os string, dv string) 
 	}
 }
 
-func NodeDelete(hostname string) error {
-	err, ok := NodeCheck(hostname)
-	if ok {
-		if err := db.Where("host_name = ?", hostname).First(&Node{}).Delete(&Node{}).Error; err != nil {
-			return err
-		} else {
-			return nil
-		}
-	} else {
-		return err
-	}
-}
-
-func NodeList() ([]*Node, error) {
+func ListNodes() ([]*Node, error) {
 	var list []*Node
 	if err := db.Find(&list).Error; err != nil {
 		return nil, err

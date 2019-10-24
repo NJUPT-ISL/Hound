@@ -8,8 +8,8 @@ import (
 
 func PostNodeJoin(c *gin.Context) {
 
-	if _, ok := models.NodeCheck(c.PostForm("Host")); ok != true {
-		if err := models.NodesCreate(c.PostForm("Host"),
+	if _, ok := models.CheckNode(c.PostForm("Host")); ok != true {
+		if err := models.CreateNode(c.PostForm("Host"),
 			c.PostForm("Role"),
 			c.PostForm("kv"),
 			c.PostForm("os"),
@@ -30,11 +30,10 @@ func PostNodeJoin(c *gin.Context) {
 		})
 		log.Printf("Node " + c.PostForm("Host") + " already exists,and does not need to send a join message.")
 	}
-
 }
 
 func PostNodeUpdate(c *gin.Context) {
-	if err := models.NodesUpdate(
+	if err := models.UpdateNode(
 		c.PostForm("Host"),
 		c.PostForm("Role"),
 		c.PostForm("kv"),
@@ -53,7 +52,7 @@ func PostNodeUpdate(c *gin.Context) {
 }
 
 func GetNodeList(c *gin.Context) {
-	list, err := models.NodeList()
+	list, err := models.ListNodes()
 	if err != nil {
 		c.JSON(200, gin.H{
 			"state": "failed",

@@ -1,15 +1,31 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type Token struct {
-	Name         string `gorm:"unique;not null"`
+	Name         string `gorm:"PRIMARY_KEY;unique;not null"`
 	Token        string
 	GenerateTime time.Time
 	UpdateTime   time.Time
 }
 
-func TokenCreate(name string, token string) error {
+func CheckToken(name string) (err error, ok bool) {
+	t, err := GetToken(name)
+	if err != nil {
+		return err, false
+	}
+	if t.Token == "" {
+		return nil, false
+	}
+	return nil, true
+}
+
+func CreateToken(name string, token string) error {
+	if err := db.Where("name = ?", name).First(&Node{}).Error; err != nil {
+		return err
+	}
 	t := Token{
 		Name:         name,
 		Token:        token,
@@ -22,14 +38,7 @@ func TokenCreate(name string, token string) error {
 	return nil
 }
 
-func TokenCheck(name string) (error, bool) {
-	if err := db.Where("name = ?", name).First(&Token{}).Error; err != nil {
-		return err, false
-	}
-	return nil, true
-}
-
-func TokenQuery(name string) (*Token, error) {
+func GetToken(name string) (*Token, error) {
 	t := Token{}
 	if err := db.Where("name = ?", name).First(&t).Error; err != nil {
 		return nil, err
@@ -38,12 +47,12 @@ func TokenQuery(name string) (*Token, error) {
 	}
 }
 
-func TokenUpdate(name string, token string) error {
-	err, ok := TokenCheck(name)
+func UpdateToken(name string, token string) error {
+	err, ok := CheckToken(name)
 	if ok {
 		if err := db.Where("name = ?", name).First(&Token{}).Updates(
 			map[string]interface{}{
-				"HostName":   name,
+				"Name":       name,
 				"Token":      token,
 				"UpdateTime": time.Now()}).Error; err != nil {
 			return err
@@ -55,7 +64,7 @@ func TokenUpdate(name string, token string) error {
 	}
 }
 
-func TokenList() ([]*Token, error) {
+func ListToken() ([]*Token, error) {
 	var list []*Token
 	if err := db.Find(&list).Error; err != nil {
 		return nil, err

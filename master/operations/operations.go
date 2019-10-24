@@ -60,7 +60,7 @@ func GetOperations(Method string, NodeName string, token string) {
 }
 
 func Pull(NodeName string, images []string) {
-	token, err := models.TokenQuery(NodeName)
+	token, err := models.GetToken(NodeName)
 	if err != nil {
 		panic(err)
 	}
@@ -68,7 +68,7 @@ func Pull(NodeName string, images []string) {
 }
 
 func Remove(NodeName string, images []string) {
-	token, err := models.TokenQuery(NodeName)
+	token, err := models.GetToken(NodeName)
 	if err != nil {
 		panic(err)
 	}
@@ -76,7 +76,7 @@ func Remove(NodeName string, images []string) {
 }
 
 func Prune(NodeName string) {
-	token, err := models.TokenQuery(NodeName)
+	token, err := models.GetToken(NodeName)
 	if err != nil {
 		panic(err)
 	}

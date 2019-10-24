@@ -6,51 +6,28 @@ import (
 
 type Label struct {
 	gorm.Model
-	Name  string
-	Nodes []Node `gorm:"many2many:label_nodes;"`
+	Name string
+	Node string
 }
 
-func LabelCreate(name string) error {
-	L := Label{
-		Name: name,
-	}
-	if err := db.Create(&L).Error; err != nil {
+func CreateLabelWithNode(name string, node string) error {
+	err, ok := CheckNode(node)
+	if err != nil {
 		return err
+	}
+	if ok {
+		L := Label{
+			Name: name,
+			Node: node,
+		}
+		if err := db.Create(&L).Error; err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
-func LabelCheck(name string) (error, bool) {
-	if err := db.Where("name = ?", name).First(&Label{}).Error; err != nil {
-		return err, false
-	}
-	return nil, true
-}
-
-func LabelQuery(name string) ([]*Label, error) {
-	var labels []*Label
-	if err := db.Where("name = ?", name).Find(&labels).Error; err != nil {
-		return nil, err
-	} else {
-		return labels, nil
-	}
-}
-
-func LabelDelete(name string) error {
-	var labels []*Label
-	err, ok := LabelCheck(name)
-	if ok {
-		if err := db.Where("name = ?", name).Find(&labels).Delete(&labels).Error; err != nil {
-			return err
-		} else {
-			return nil
-		}
-	} else {
-		return err
-	}
-}
-
-func LabelListAll() ([]*Label, error) {
+func ListAllLabels() ([]*Label, error) {
 	var labelList []*Label
 	if err := db.Find(&labelList).Error; err != nil {
 		return nil, err
@@ -59,12 +36,26 @@ func LabelListAll() ([]*Label, error) {
 	}
 }
 
-func LabelOnlyList() ([]*Label, error) {
+//func CheckLabel(name string) (error, bool) {
+//	if err := db.Where("name = ?", name).First(&Label{}).Error; err != nil {
+//		return err, false
+//	}
+//	return nil, true
+//}
+
+func OnlyListLabels() ([]*Label, error) {
 	var list []*Label
-	if err := db.Table("labels").Select("distinct label").Scan(&list).Error; err != nil {
-		return nil, err
+	if err := db.Table("label").Select("distinct label").Scan(&list).Error; err != nil {
+		return list, err
 	} else {
-		print(list)
 		return list, nil
 	}
+}
+
+func GetLabelNodes(name string) (err error, node string) {
+	label := Label{}
+	if err := db.Where("name = ?", name).First(&label).Error; err != nil {
+		return err, label.Node
+	}
+	return nil, label.Node
 }

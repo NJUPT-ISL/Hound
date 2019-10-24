@@ -13,8 +13,8 @@ It is mainly used for the management and pruning of container images in a contai
 
 ### Development Environment
 
-- go 1.12.9
-- gin 1.3
+- go 1.13.0
+- gin 1.4.0
 
 ### Feature
 - Service image pre-pull in batches
@@ -23,7 +23,24 @@ It is mainly used for the management and pruning of container images in a contai
 - Set the pulling image according to the label node
 - Periodically update the image
 
+### Get Started
+
+- Run Master
+```shell
+export Hound_Key=123 hostname=localhost 
+export hostname=localhost
+go run ./master/main.go
+```
+- Run Agent 
+```shell
+export Hound_Key=123 hostname=localhost 
+export hostname=localhost
+export MasterUrl=localhost:8080
+go run ./agent/main.go
+```
+
 ### Development log
+- Date: 10.24.2019 Refactore the Master model structure.
 - Date: 7.2.2019  Add Labels Base Functions.
 - Date: 6.12.2019 Add function of Node Operations.
 - Date: 4.16.2019 Upgrade Node Join features.

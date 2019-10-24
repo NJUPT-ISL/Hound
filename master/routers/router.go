@@ -34,7 +34,7 @@ func InitRouter() *gin.Engine {
 	}
 	tokensGroup := router.Group("/tokens")
 	{
-		tokensGroup.POST("send", api.SendToken)
+		tokensGroup.POST("send", api.GetToken)
 		tokensGroup.GET("list", api.GetTokenList)
 	}
 	operationsGroup := router.Group("/operations")
