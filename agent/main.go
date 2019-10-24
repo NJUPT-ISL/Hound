@@ -1,29 +1,18 @@
 package main
 
 import (
-	"./lib"
-	"./routers"
-	"./tokens"
+	"github.com/NJUPT-ISL/Hound/agent/cornjob"
+	"github.com/NJUPT-ISL/Hound/agent/lib"
+	"github.com/NJUPT-ISL/Hound/agent/routers"
+	"github.com/NJUPT-ISL/Hound/agent/tokens"
 	"github.com/gin-gonic/gin"
-	"github.com/robfig/cron"
 	"io"
 	"log"
 	"os"
 )
 
 func main() {
-
-	// Set cron
-	cronJob := cron.New()
-	spec := "* */5 * * * ?"
-	if err := cronJob.AddFunc(spec, func() {
-		lib.SendUpdate()
-	}); err != nil {
-		panic(err)
-	}
-
 	lib.SendJoin()
-	//cronJob.Start()
 	// Disable Debug mode
 	//gin.SetMode(gin.ReleaseMode)
 	// Enable Logs
@@ -41,7 +30,8 @@ func main() {
 	Addr := ":8081"
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	log.Printf("Hound Service Agent is running at" + Addr)
-	go cronJob.Start()
+	go cornjob.SendUpdateJob()
 	r := routers.InitRouter(&token)
 	_ = r.RunTLS(Addr, "pem/server.crt", "pem/server.key") // listen and serve on 0.0.0.0:8081
+
 }

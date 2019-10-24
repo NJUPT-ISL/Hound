@@ -26,7 +26,9 @@ func SendToken(token string) {
 		url.Values{"Host": {os.Getenv("hostname")}, "Token": {token}})
 	if err != nil {
 		log.Printf("Send Token message failed.")
-		panic(err)
+		log.Println(err)
+	} else {
+		log.Println("Send Token message successfully.")
 	}
 }
 
@@ -55,8 +57,10 @@ func SendUpdate() {
 			"dv":   {info.ServerVersion},
 		})
 	if err != nil {
-		log.Printf("Send Join message failed.")
-		panic(err)
+		log.Printf("Send update message failed.")
+		log.Println(err)
+	} else {
+		log.Println("Send update message successfully.")
 	}
 }
 
@@ -87,5 +91,7 @@ func SendJoin() {
 	if err != nil {
 		log.Printf("Send Join message failed.")
 		panic(err)
+	} else {
+		log.Println("Send Join message successfully.")
 	}
 }

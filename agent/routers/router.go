@@ -1,10 +1,10 @@
 package routers
 
 import (
-	"../api"
-	"../middlewares"
-	"../tokens"
 	"fmt"
+	"github.com/NJUPT-ISL/Hound/agent/api"
+	"github.com/NJUPT-ISL/Hound/agent/middlewares"
+	"github.com/NJUPT-ISL/Hound/agent/tokens"
 	"github.com/gin-gonic/gin"
 	"time"
 )

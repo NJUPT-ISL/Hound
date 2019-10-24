@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"../tokens"
+	"github.com/NJUPT-ISL/Hound/agent/tokens"
 	"github.com/gin-gonic/gin"
 	"log"
 	"os"
