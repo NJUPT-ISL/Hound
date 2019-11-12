@@ -3,9 +3,7 @@ package routers
 import (
 	"fmt"
 	"github.com/NJUPT-ISL/Hound/master/api"
-	dash "github.com/NJUPT-ISL/Hound/master/api/dashboard"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"time"
 )
 
