@@ -26,20 +26,38 @@ func GetLabelOnlyList(c *gin.Context) {
 	}
 }
 
-func PostAddLabel(c *gin.Context) {
+func PostAddLabelToNode(c *gin.Context) {
 	node := c.PostForm("node")
 	label := c.PostForm("label")
 	if err := models.CreateLabelWithNode(label, node); err != nil {
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})
-	} else {
-		c.JSON(200, gin.H{
-			"state": "ok",
-		})
-		log.Printf("Label added, node: " + node + " label: " + label)
+		log.Println(err)
+		return
 	}
-	c.JSON(200, node+label)
+	c.JSON(200, gin.H{
+		"state": "ok",
+	})
+	log.Printf("Label added, node: " + node + " label: " + label)
+}
+
+func PostAddLabelToNodes(c *gin.Context) {
+	nodes := c.PostFormArray("node")
+	label := c.PostForm("label")
+	for _, node := range nodes {
+		if err := models.CreateLabelWithNode(label, node); err != nil {
+			c.JSON(200, gin.H{
+				"state": "failed",
+			})
+			log.Println(err)
+		} else {
+			c.JSON(200, gin.H{
+				"state": "ok",
+			})
+			log.Printf("Label added, node: " + node + " label: " + label)
+		}
+	}
 }
 
 func PostLabelNodelist(c *gin.Context) {

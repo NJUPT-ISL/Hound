@@ -52,10 +52,13 @@ func OnlyListLabels() ([]*Label, error) {
 	}
 }
 
-func GetLabelNodes(name string) (err error, node string) {
-	label := Label{}
-	if err := db.Where("name = ?", name).First(&label).Error; err != nil {
-		return err, label.Node
+func GetLabelNodes(name string) (nodes []string, err error) {
+	var LNs []Label
+	if err := db.Where("name = ?", name).Find(&LNs).Error; err != nil {
+		return nodes, err
 	}
-	return nil, label.Node
+	for _, ln := range LNs {
+		nodes = append(nodes, ln.Node)
+	}
+	return nodes, nil
 }

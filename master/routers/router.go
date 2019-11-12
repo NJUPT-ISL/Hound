@@ -3,7 +3,9 @@ package routers
 import (
 	"fmt"
 	"github.com/NJUPT-ISL/Hound/master/api"
+	dash "github.com/NJUPT-ISL/Hound/master/api/dashboard"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"time"
 )
 
@@ -47,8 +49,15 @@ func InitRouter() *gin.Engine {
 	{
 		labelsGroup.GET("list", api.GetLabelListAll)
 		labelsGroup.GET("only", api.GetLabelOnlyList)
-		labelsGroup.POST("add", api.PostAddLabel)
+		labelsGroup.POST("add", api.PostAddLabelToNode)
+		labelsGroup.POST("adds", api.PostAddLabelToNodes)
 		labelsGroup.POST("node", api.PostLabelNodelist)
+	}
+	labelOpsGroup := router.Group("/labelops")
+	{
+		labelOpsGroup.POST("prune", api.PostLabelPrune)
+		labelOpsGroup.POST("pull", api.PostLabelPull)
+		labelOpsGroup.POST("remove", api.PostLabelRemove)
 	}
 	return router
 }
