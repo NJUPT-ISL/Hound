@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/api/labels.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/api/labels.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/api/nodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/api/nodes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/api/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/api/token.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/log/master.log" beforeDir="false" afterPath="$PROJECT_DIR$/master/log/master.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/models/labels.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/labels.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/models/nodes.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/nodes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/models/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/token.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/operations/operations.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/operations/operations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/api/image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/api/image.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/lib/docker-image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/docker-image.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/lib/send.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/send.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/log/agent.log" beforeDir="false" afterPath="$PROJECT_DIR$/agent/log/agent.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +35,9 @@
     </expand>
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Hound" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -57,8 +54,11 @@
     <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1S2rzsw7UNV6pIRo8tVziSHPNMf" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -72,6 +72,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/master" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -105,7 +106,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.TestDockerInfo in docker-image_test.go">
+  <component name="RunManager" selected="Go Build.go build main.go">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Hound" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/master/main.go" />
+      <package value="github.com/NJUPT-ISL/Hound" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestDockerInfo in docker-image_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="Hound" />
       <working_directory value="$PROJECT_DIR$/agent/lib" />
@@ -147,12 +157,14 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Test.go test lib" />
       <item itemvalue="Go Test.TestDockerInfo in docker-image_test.go" />
       <item itemvalue="Go Test.TestListAllImages in lib" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Test.TestDockerInfo in docker-image_test.go" />
         <item itemvalue="Go Test.TestListAllImages in lib" />
       </list>
@@ -206,6 +218,9 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
     <proxy>https://goproxy.io</proxy>
@@ -226,6 +241,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Hound$TestDockerInfo_in_docker_image_test_go.out" NAME="TestDockerInfo in docker-image_test.go Coverage Results" MODIFIED="1572433920206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Hound$docker_image_test_go.out" NAME="docker-image_test.go Coverage Results" MODIFIED="1554267298464" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="masterDetails">

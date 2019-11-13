@@ -23,7 +23,7 @@ func SendToken(token string) {
 	client := &http.Client{Transport: tr}
 	_, err := client.PostForm(
 		"https://"+os.Getenv("MasterUrl")+"/tokens/send",
-		url.Values{"Host": {os.Getenv("hostname")}, "Token": {token}})
+		url.Values{"Host": {os.Getenv("HOSTNAME")}, "Token": {token}})
 	if err != nil {
 		log.Printf("Send Token message failed.")
 		log.Println(err)
@@ -50,7 +50,7 @@ func SendUpdate() {
 	client := &http.Client{Transport: tr}
 	_, err = client.PostForm(
 		"https://"+os.Getenv("MasterUrl")+"/nodes/update",
-		url.Values{"Host": {os.Getenv("hostname")},
+		url.Values{"Host": {os.Getenv("HOSTNAME")},
 			"Role": {"agent"},
 			"kv":   {info.KernelVersion},
 			"os":   {info.OperatingSystem},
@@ -82,7 +82,7 @@ func SendJoin() {
 	client := &http.Client{Transport: tr}
 	_, err = client.PostForm(
 		"https://"+os.Getenv("MasterUrl")+"/nodes/join",
-		url.Values{"Host": {os.Getenv("hostname")},
+		url.Values{"Host": {os.Getenv("HOSTNAME")},
 			"Role": {"agent"},
 			"kv":   {info.KernelVersion},
 			"os":   {info.OperatingSystem},

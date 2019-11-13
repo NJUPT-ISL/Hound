@@ -1,13 +1,14 @@
 package lib
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
 	"io"
-	"os"
+	"time"
 )
 
 // List all images
@@ -36,13 +37,14 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 			fmt.Println(err)
 		}
 	}()
-
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
 		panic(err)
 	}
 	out, err := cli.ImagePull(ctx, ImageName, types.ImagePullOptions{All: false})
+	fmt.Println("Start:")
+	fmt.Println(time.Now())
 	if err != nil {
 		panic(err)
 	}
@@ -52,10 +54,14 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 			panic(outerr)
 		}
 	}()
-	_, ioerr := io.Copy(os.Stdout, out)
+	var buf = new(bytes.Buffer)
+	_, ioerr := buf.ReadFrom(out)
+	//_, ioerr := io.Copy(os.NewFile(uintptr(syscall.Stdout), "/dev/null"), out)
 	if err != nil {
 		panic(ioerr)
 	}
+	fmt.Println("End:")
+	fmt.Println(time.Now())
 	return out, err
 }
 

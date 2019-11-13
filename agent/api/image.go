@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"github.com/NJUPT-ISL/Hound/agent/lib"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -47,10 +48,14 @@ func PostImagePull(c *gin.Context) {
 	imageNames := c.PostFormArray("imageName")
 	go func() {
 		for _, imageName := range imageNames {
-			_, err := lib.ImagePull(imageName)
-			if err != nil {
-				panic(err)
-			}
+
+			go func() {
+				_, err := lib.ImagePull(imageName)
+				if err != nil {
+					log.Println(err)
+				}
+			}()
+
 		}
 	}()
 	c.JSON(200, gin.H{
@@ -67,10 +72,12 @@ func PostImageRemove(c *gin.Context) {
 	}
 	go func() {
 		for _, imageName := range imageNames {
-			_, err := lib.ImageRemove(imageName, force)
-			if err != nil {
-				log.Panic(err)
-			}
+			go func() {
+				_, err := lib.ImageRemove(imageName, force)
+				if err != nil {
+					fmt.Println(err)
+				}
+			}()
 		}
 	}()
 	c.JSON(200, gin.H{

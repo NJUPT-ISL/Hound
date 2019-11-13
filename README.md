@@ -27,16 +27,14 @@ It is mainly used for the management and pruning of container images in a contai
 
 - Run Master
 ```shell
-export Hound_Key=123 hostname=localhost 
-export hostname=localhost
-go run ./master/main.go
+export Hound_Key=123 
+cd master && go run main.go
 ```
 - Run Agent 
 ```shell
-export Hound_Key=123 hostname=localhost 
-export hostname=localhost
+export Hound_Key=123 
 export MasterUrl=localhost:8080
-go run ./agent/main.go
+cd agent && go run main.go
 ```
 
 ### Development log

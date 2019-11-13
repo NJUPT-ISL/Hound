@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/NJUPT-ISL/Hound/agent/cornjob"
 	"github.com/NJUPT-ISL/Hound/agent/lib"
 	"github.com/NJUPT-ISL/Hound/agent/routers"
 	"github.com/NJUPT-ISL/Hound/agent/tokens"
@@ -30,7 +29,7 @@ func main() {
 	Addr := ":8081"
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	log.Printf("Hound Service Agent is running at" + Addr)
-	go cornjob.SendUpdateJob()
+	//go cornjob.SendUpdateJob()
 	r := routers.InitRouter(&token)
 	_ = r.RunTLS(Addr, "pem/server.crt", "pem/server.key") // listen and serve on 0.0.0.0:8081
 
