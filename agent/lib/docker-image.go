@@ -8,8 +8,12 @@ import (
 	"github.com/docker/docker/client"
 	"golang.org/x/net/context"
 	"io"
+	"log"
+	"sync"
 	"time"
 )
+
+var workers = 5
 
 // List all images
 func ListAllImages() ([]types.ImageSummary, error) {
@@ -32,21 +36,16 @@ func ListAllImages() ([]types.ImageSummary, error) {
 
 // Pull Docker Images
 func ImagePull(ImageName string) (io.ReadCloser, error) {
-	defer func() {
-		if err := recover(); err != nil {
-			fmt.Println(err)
-		}
-	}()
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts(client.WithVersion("1.39"))
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	out, err := cli.ImagePull(ctx, ImageName, types.ImagePullOptions{All: false})
-	fmt.Println("Start:")
+	fmt.Print("The Pull Task: " + ImageName + ", start at :")
 	fmt.Println(time.Now())
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	defer func() {
 		outerr := out.Close()
@@ -54,15 +53,44 @@ func ImagePull(ImageName string) (io.ReadCloser, error) {
 			panic(outerr)
 		}
 	}()
-	var buf = new(bytes.Buffer)
-	_, ioerr := buf.ReadFrom(out)
-	//_, ioerr := io.Copy(os.NewFile(uintptr(syscall.Stdout), "/dev/null"), out)
-	if err != nil {
-		panic(ioerr)
+	if _, err := new(bytes.Buffer).ReadFrom(out); err != nil {
+		log.Println(err)
 	}
-	fmt.Println("End:")
+	fmt.Print("The Pull Task: " + ImageName + ", end at :")
 	fmt.Println(time.Now())
 	return out, err
+}
+
+func ImagesPull(images []string) {
+	var stop <-chan struct{}
+	pieces := len(images)
+	toProcess := make(chan string, pieces)
+	for _, image := range images {
+		toProcess <- image
+	}
+	close(toProcess)
+	if pieces < workers {
+		workers = pieces
+	}
+	wg := sync.WaitGroup{}
+	wg.Add(workers)
+	for i := 0; i < workers; i++ {
+		go func() {
+			defer wg.Done()
+			for image := range toProcess {
+				select {
+				case <-stop:
+					return
+				default:
+					if _, err := ImagePull(image); err != nil {
+						log.Println(err)
+					}
+				}
+			}
+		}()
+	}
+	wg.Wait()
+	ResetWorker(5)
 }
 
 // remove images
@@ -118,4 +146,8 @@ func DockerInfo() (types.Info, error) {
 	}
 	out, err := cli.Info(ctx)
 	return out, err
+}
+
+func ResetWorker(num int) {
+	workers = num
 }

@@ -57,8 +57,9 @@ func GetLabelNodes(name string) (nodes []string, err error) {
 	if err := db.Where("name = ?", name).Find(&LNs).Error; err != nil {
 		return nodes, err
 	}
+	var n []string
 	for _, ln := range LNs {
-		nodes = append(nodes, ln.Node)
+		n = append(n, ln.Node)
 	}
-	return nodes, nil
+	return n, nil
 }

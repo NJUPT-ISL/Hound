@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/NJUPT-ISL/Hound/agent/lib"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 // Get Action
@@ -44,20 +43,9 @@ func GetDockerInfo(c *gin.Context) {
 }
 
 // PostAction
+
 func PostImagePull(c *gin.Context) {
-	imageNames := c.PostFormArray("imageName")
-	go func() {
-		for _, imageName := range imageNames {
-
-			go func() {
-				_, err := lib.ImagePull(imageName)
-				if err != nil {
-					log.Println(err)
-				}
-			}()
-
-		}
-	}()
+	go lib.ImagesPull(c.PostFormArray("imageName"))
 	c.JSON(200, gin.H{
 		"message": "OK",
 	})

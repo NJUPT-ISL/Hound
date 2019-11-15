@@ -15,7 +15,7 @@ func InitRouter() *gin.Engine {
 
 		return fmt.Sprintf("[Hound Master]%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
 			param.ClientIP,
-			param.TimeStamp.Format(time.RFC1123),
+			time.Now(),
 			param.Method,
 			param.Path,
 			param.Request.Proto,

@@ -14,8 +14,8 @@ func PostOperations(Method string, NodeName string, token string, images []strin
 		InsecureSkipVerify: true,
 	}
 	tr := &http.Transport{
-		MaxIdleConns:       10,
-		IdleConnTimeout:    30 * time.Second,
+		MaxIdleConns:       20,
+		IdleConnTimeout:    60 * time.Second,
 		DisableCompression: true,
 		TLSClientConfig:    &config,
 	}
@@ -41,8 +41,8 @@ func GetOperations(Method string, NodeName string, token string) {
 		InsecureSkipVerify: true,
 	}
 	tr := &http.Transport{
-		MaxIdleConns:       10,
-		IdleConnTimeout:    30 * time.Second,
+		MaxIdleConns:       20,
+		IdleConnTimeout:    60 * time.Second,
 		DisableCompression: true,
 		TLSClientConfig:    &config,
 	}

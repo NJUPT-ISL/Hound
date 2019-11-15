@@ -32,5 +32,4 @@ func main() {
 	//go cornjob.SendUpdateJob()
 	r := routers.InitRouter(&token)
 	_ = r.RunTLS(Addr, "pem/server.crt", "pem/server.key") // listen and serve on 0.0.0.0:8081
-
 }

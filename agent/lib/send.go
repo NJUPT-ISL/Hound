@@ -68,7 +68,7 @@ func SendUpdate() {
 func SendJoin() {
 	info, err := DockerInfo()
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	config := tls.Config{
 		InsecureSkipVerify: true,
@@ -90,7 +90,8 @@ func SendJoin() {
 		})
 	if err != nil {
 		log.Printf("Send Join message failed.")
-		panic(err)
+		time.Sleep(5000000000)
+		SendJoin()
 	} else {
 		log.Println("Send Join message successfully.")
 	}
