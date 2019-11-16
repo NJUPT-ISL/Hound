@@ -38,6 +38,8 @@ cd agent && go run main.go
 ```
 
 ### Development log
+- Date: 11.17.2019 Containerized the system
+- Date: 11.15.2019 Fixed some bugs and improved system concurrency.
 - Date: 10.24.2019 Refactore the Master model structure.
 - Date: 7.2.2019  Add Labels Base Functions.
 - Date: 6.12.2019 Add function of Node Operations.
