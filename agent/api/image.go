@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"github.com/NJUPT-ISL/Hound/agent/lib"
 	"github.com/gin-gonic/gin"
 )
@@ -58,16 +57,7 @@ func PostImageRemove(c *gin.Context) {
 	if c.PostForm("Force") == "true" {
 		force = true
 	}
-	go func() {
-		for _, imageName := range imageNames {
-			go func() {
-				_, err := lib.ImageRemove(imageName, force)
-				if err != nil {
-					fmt.Println(err)
-				}
-			}()
-		}
-	}()
+	lib.ImagesRemove(imageNames)
 	c.JSON(200, gin.H{
 		"message": "OK",
 	})

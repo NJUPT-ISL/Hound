@@ -1,4 +1,4 @@
-package cornjob
+package cronjob
 
 import (
 	"github.com/NJUPT-ISL/Hound/agent/lib"

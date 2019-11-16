@@ -29,7 +29,7 @@ func main() {
 	Addr := ":8081"
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	log.Printf("Hound Service Agent is running at" + Addr)
-	//go cornjob.SendUpdateJob()
+	//cronjob.SendUpdateJob()
 	r := routers.InitRouter(&token)
 	_ = r.RunTLS(Addr, "pem/server.crt", "pem/server.key") // listen and serve on 0.0.0.0:8081
 }
