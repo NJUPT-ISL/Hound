@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -81,4 +82,62 @@ func Prune(NodeName string) {
 		panic(err)
 	}
 	GetOperations("prune", NodeName, token.Token)
+}
+
+func Parallelize(workers int, nodes []string, images []string, Do func(string, []string)) {
+	var stop <-chan struct{}
+	pieces := len(nodes)
+	toProcess := make(chan string, pieces)
+	for _, n := range nodes {
+		toProcess <- n
+	}
+	close(toProcess)
+	if pieces < workers {
+		workers = pieces
+	}
+	wg := sync.WaitGroup{}
+	wg.Add(workers)
+	for i := 0; i < workers; i++ {
+		go func() {
+			defer wg.Done()
+			for n := range toProcess {
+				select {
+				case <-stop:
+					return
+				default:
+					Do(n, images)
+				}
+			}
+		}()
+	}
+	wg.Wait()
+}
+
+func ParallelizeWithString(workers int, nodes []string, Do func(string)) {
+	var stop <-chan struct{}
+	pieces := len(nodes)
+	toProcess := make(chan string, pieces)
+	for _, n := range nodes {
+		toProcess <- n
+	}
+	close(toProcess)
+	if pieces < workers {
+		workers = pieces
+	}
+	wg := sync.WaitGroup{}
+	wg.Add(workers)
+	for i := 0; i < workers; i++ {
+		go func() {
+			defer wg.Done()
+			for n := range toProcess {
+				select {
+				case <-stop:
+					return
+				default:
+					Do(n)
+				}
+			}
+		}()
+	}
+	wg.Wait()
 }

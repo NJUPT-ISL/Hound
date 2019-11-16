@@ -5,7 +5,6 @@ import (
 	"github.com/NJUPT-ISL/Hound/master/operations"
 	"github.com/gin-gonic/gin"
 	"log"
-	"sync"
 )
 
 var workers = 10
@@ -41,11 +40,7 @@ func PostLabelPrune(c *gin.Context) {
 		return
 	}
 
-	for _, n := range nodes {
-		go func() {
-			operations.Prune(n)
-		}()
-	}
+	operations.ParallelizeWithString(workers, nodes, operations.Prune)
 	c.JSON(200, gin.H{
 		"state": "ok",
 	})
@@ -60,33 +55,7 @@ func PostLabelPull(c *gin.Context) {
 		})
 		return
 	}
-	var stop <-chan struct{}
-	pieces := len(nodes)
-	toProcess := make(chan string, pieces)
-	for _, n := range nodes {
-		toProcess <- n
-	}
-	close(toProcess)
-	if pieces < workers {
-		workers = pieces
-	}
-	wg := sync.WaitGroup{}
-	wg.Add(workers)
-	for i := 0; i < workers; i++ {
-		go func() {
-			defer wg.Done()
-			for n := range toProcess {
-				select {
-				case <-stop:
-					return
-				default:
-					operations.Pull(n, c.PostFormArray("imageName"))
-				}
-			}
-		}()
-	}
-	wg.Wait()
-	workers = 10
+	operations.Parallelize(workers, nodes, c.PostFormArray("imageName"), operations.Pull)
 	c.JSON(200, gin.H{
 		"state": "ok",
 	})
@@ -101,11 +70,7 @@ func PostLabelRemove(c *gin.Context) {
 		})
 		return
 	}
-	for _, n := range nodes {
-		go func() {
-			operations.Remove(n, c.PostFormArray("imageName"))
-		}()
-	}
+	operations.Parallelize(workers, nodes, c.PostFormArray("imageName"), operations.Remove)
 	c.JSON(200, gin.H{
 		"state": "ok",
 	})

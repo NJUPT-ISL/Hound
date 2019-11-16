@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/api/image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/api/image.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/lib/docker-image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/docker-image.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/lib/send.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/send.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/log/agent.log" beforeDir="false" afterPath="$PROJECT_DIR$/agent/log/agent.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/routers/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/master/api/operations.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/api/operations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/models/labels.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/models/labels.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/master/operations/operations.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/operations/operations.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/routers/router.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
