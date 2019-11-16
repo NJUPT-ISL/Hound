@@ -73,9 +73,9 @@ func ImageRemove(ImageName string, Force bool) error {
 	return err
 }
 
-func ImagesRemove(images []string) {
+func ImagesRemove(images []string, force bool) {
 	Parallelize(workers, images, func(s string) error {
-		return ImageRemove(s, false)
+		return ImageRemove(s, force)
 	})
 }
 

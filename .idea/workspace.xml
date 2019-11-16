@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/cornjob/cronjob.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/cronjob/cronjob.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/lib/docker-image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/docker-image.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

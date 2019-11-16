@@ -51,13 +51,12 @@ func PostImagePull(c *gin.Context) {
 }
 
 func PostImageRemove(c *gin.Context) {
-
 	imageNames := c.PostFormArray("imageName")
 	force := false
 	if c.PostForm("Force") == "true" {
 		force = true
 	}
-	lib.ImagesRemove(imageNames)
+	lib.ImagesRemove(imageNames, force)
 	c.JSON(200, gin.H{
 		"message": "OK",
 	})
