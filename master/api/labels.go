@@ -1,13 +1,14 @@
 package api
 
 import (
+	"github.com/NJUPT-ISL/Hound/master/log"
 	"github.com/NJUPT-ISL/Hound/master/models"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func GetLabelListAll(c *gin.Context) {
 	if label, err := models.ListAllLabels(); err != nil {
+		log.ErrPrint(err)
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})
@@ -18,6 +19,7 @@ func GetLabelListAll(c *gin.Context) {
 
 func GetLabelOnlyList(c *gin.Context) {
 	if label, err := models.OnlyListLabels(); err != nil {
+		log.ErrPrint(err)
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})
@@ -33,13 +35,13 @@ func PostAddLabelToNode(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})
-		log.Println(err)
+		log.ErrPrint(err)
 		return
 	}
 	c.JSON(200, gin.H{
 		"state": "ok",
 	})
-	log.Printf("Label added, node: " + node + " label: " + label)
+	log.Print("Label added, node: " + node + " label: " + label)
 }
 
 func PostAddLabelToNodes(c *gin.Context) {
@@ -50,19 +52,20 @@ func PostAddLabelToNodes(c *gin.Context) {
 			c.JSON(200, gin.H{
 				"state": "failed",
 			})
-			log.Println(err)
+			log.ErrPrint(err)
 		} else {
 			c.JSON(200, gin.H{
 				"state": "ok",
 			})
-			log.Printf("Label added, node: " + node + " label: " + label)
+			log.Print("Label added, node: " + node + " label: " + label)
 		}
 	}
 }
 
 func PostLabelNodelist(c *gin.Context) {
 	label := c.PostForm("label")
-	if err, nodes := models.GetLabelNodes(label); err != nil {
+	if nodes, err := models.GetLabelNodes(label); err != nil {
+		log.ErrPrint(err)
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})

@@ -1,9 +1,9 @@
 package api
 
 import (
+	"github.com/NJUPT-ISL/Hound/master/log"
 	"github.com/NJUPT-ISL/Hound/master/models"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func GetToken(c *gin.Context) {
@@ -14,12 +14,12 @@ func GetToken(c *gin.Context) {
 			c.JSON(200, gin.H{
 				"state": "failed",
 			})
-			log.Println(err)
+			log.ErrPrint(err)
 		} else {
 			c.JSON(200, gin.H{
 				"state": "ok",
 			})
-			log.Printf("Get Node Token,HostName: " + Hostname + " Token:" + Token)
+			log.Print("Get Node Token,HostName: " + Hostname + " Token:" + Token)
 		}
 	} else {
 
@@ -32,7 +32,7 @@ func GetToken(c *gin.Context) {
 			c.JSON(200, gin.H{
 				"state": "ok",
 			})
-			log.Printf("Node: " + Hostname + " Token Updated: " + Token)
+			log.Print("Node: " + Hostname + " Token Updated: " + Token)
 		}
 	}
 

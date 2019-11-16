@@ -1,10 +1,10 @@
 package api
 
 import (
+	"github.com/NJUPT-ISL/Hound/master/log"
 	"github.com/NJUPT-ISL/Hound/master/models"
 	"github.com/NJUPT-ISL/Hound/master/operations"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 var workers = 10
@@ -33,13 +33,12 @@ func PostNodeRemoveImage(c *gin.Context) {
 func PostLabelPrune(c *gin.Context) {
 	nodes, err := models.GetLabelNodes(c.PostForm("Label"))
 	if err != nil {
-		log.Println(err)
+		log.ErrPrint(err)
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})
 		return
 	}
-
 	operations.ParallelizeWithString(workers, nodes, operations.Prune)
 	c.JSON(200, gin.H{
 		"state": "ok",
@@ -49,7 +48,7 @@ func PostLabelPrune(c *gin.Context) {
 func PostLabelPull(c *gin.Context) {
 	nodes, err := models.GetLabelNodes(c.PostForm("Label"))
 	if err != nil {
-		log.Println(err)
+		log.ErrPrint(err)
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})
@@ -64,7 +63,7 @@ func PostLabelPull(c *gin.Context) {
 func PostLabelRemove(c *gin.Context) {
 	nodes, err := models.GetLabelNodes(c.PostForm("Label"))
 	if err != nil {
-		log.Println(err)
+		log.ErrPrint(err)
 		c.JSON(200, gin.H{
 			"state": "failed",
 		})

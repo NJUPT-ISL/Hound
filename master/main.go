@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/NJUPT-ISL/Hound/master/log"
 	"github.com/NJUPT-ISL/Hound/master/models"
 	"github.com/NJUPT-ISL/Hound/master/routers"
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,7 @@ func main() {
 	gin.DisableConsoleColor()
 	f, err := os.Create("log/master.log")
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 	r := routers.InitRouter()

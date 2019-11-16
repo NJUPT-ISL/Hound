@@ -2,6 +2,7 @@ package operations
 
 import (
 	"crypto/tls"
+	"github.com/NJUPT-ISL/Hound/master/log"
 	"github.com/NJUPT-ISL/Hound/master/models"
 	"net/http"
 	"net/url"
@@ -27,13 +28,13 @@ func PostOperations(Method string, NodeName string, token string, images []strin
 	}
 	req, err := http.NewRequest("POST", "https://"+NodeName+":8081/image/"+Method, strings.NewReader(data.Encode()))
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("token", token)
 	_, err = client.Do(req)
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 }
 
@@ -50,20 +51,20 @@ func GetOperations(Method string, NodeName string, token string) {
 	client := &http.Client{Transport: tr}
 	req, err := http.NewRequest("POST", "https://"+NodeName+":8081/image/"+Method, nil)
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("token", token)
 	_, err = client.Do(req)
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 }
 
 func Pull(NodeName string, images []string) {
 	token, err := models.GetToken(NodeName)
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	PostOperations("pull", NodeName, token.Token, images)
 }
@@ -71,7 +72,7 @@ func Pull(NodeName string, images []string) {
 func Remove(NodeName string, images []string) {
 	token, err := models.GetToken(NodeName)
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	PostOperations("remove", NodeName, token.Token, images)
 }
@@ -79,7 +80,7 @@ func Remove(NodeName string, images []string) {
 func Prune(NodeName string) {
 	token, err := models.GetToken(NodeName)
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	GetOperations("prune", NodeName, token.Token)
 }

@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/NJUPT-ISL/Hound/agent/lib"
+	"github.com/NJUPT-ISL/Hound/agent/log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -9,7 +10,7 @@ import (
 func GetImageList(c *gin.Context) {
 	images, err := lib.ListAllImages()
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	c.JSON(200, images)
 }
@@ -17,7 +18,7 @@ func GetImageList(c *gin.Context) {
 func GetImagePrune(c *gin.Context) {
 	report, err := lib.ImagesPrune()
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	c.JSON(200, report)
 
@@ -26,7 +27,7 @@ func GetImagePrune(c *gin.Context) {
 func GetDockerInfo(c *gin.Context) {
 	info, err := lib.DockerInfo()
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	c.JSON(200, gin.H{
 		"Images":            info.Images,

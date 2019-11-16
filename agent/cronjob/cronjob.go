@@ -2,8 +2,8 @@ package cronjob
 
 import (
 	"github.com/NJUPT-ISL/Hound/agent/lib"
+	"github.com/NJUPT-ISL/Hound/agent/log"
 	"github.com/robfig/cron"
-	"log"
 )
 
 func SendUpdateJob() {
@@ -12,7 +12,7 @@ func SendUpdateJob() {
 	if err := cronJob.AddFunc(spec, func() {
 		lib.SendUpdate()
 	}); err != nil {
-		log.Println(err)
+		log.ErrPrint(err)
 	}
 	cronJob.Start()
 }

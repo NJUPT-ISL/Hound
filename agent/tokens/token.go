@@ -1,6 +1,7 @@
 package tokens
 
 import (
+	"github.com/NJUPT-ISL/Hound/agent/log"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
@@ -16,7 +17,7 @@ func (T *Token) GenerateToken() {
 		jwt.SigningMethodES256,
 		jwt.MapClaims{"Time": time.Now()}).SigningString()
 	if err != nil {
-		panic(err)
+		log.ErrPrint(err)
 	}
 	T.token = token
 }
