@@ -5,6 +5,7 @@ FROM golang:1.13-alpine
 # Build Project
 RUN apk add --no-cache git \
     && git clone https://github.com/NJUPT-ISL/Hound.git \
+    && export GOMOD=$PWD/Hound/go.mod \
     && mkdir -p /root/$ROLE/log \
     && touch /root/$ROLE/log/$ROLE.log \
     && cd Hound/$ROLE \
