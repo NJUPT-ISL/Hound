@@ -8,7 +8,7 @@ RUN apk add --no-cache git \
     && mkdir -p /root/$ROLE/log \
     && touch /root/$ROLE/log/$ROLE.log \
     && cd Hound/$ROLE \
-    && go build  \
+    && go build main.go \
     && mv $ROLE /root/$ROLE \
     && chmod +x /root/$ROLE \
     && cd ../.. \
