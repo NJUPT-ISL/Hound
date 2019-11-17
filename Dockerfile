@@ -8,16 +8,14 @@ RUN apk add --no-cache git \
     && export GOMOD=$PWD/Hound/go.mod \
     && mkdir -p /root/$ROLE/log \
     && touch /root/$ROLE/log/$ROLE.log \
-    && cd Hound/$ROLE \
     && go env \
     && export GO111MODULE=on \
-    && go build main.go \
-    && mv $ROLE /root/$ROLE \
-    && chmod +x /root/$ROLE \
-    && cd ../.. \
+    && go build Hound/$ROLE/main.go \
+    && mv main /root/$ROLE \
+    && chmod +x /root/$ROLE/main \
     && rm -rf Hound \
     && apk del git
 
 EXPOSE [8080, 8081]
 
-ENTRYPOINT ["/root/$ROLE/$ROLE"]
+ENTRYPOINT ["/root/$ROLE/main"]
