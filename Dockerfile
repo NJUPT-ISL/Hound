@@ -8,7 +8,8 @@ RUN apk add --no-cache git \
     && mkdir -p /root/$ROLE/log \
     && touch /root/$ROLE/log/$ROLE.log \
     && cd Hound/$ROLE \
-    && go build . -o /root/$ROLE \
+    && go build  \
+    && mv $ROLE /root/$ROLE/
     && chmod +x /root/$ROLE \
     && cd ../.. \
     && rm -rf Hound \
@@ -16,4 +17,4 @@ RUN apk add --no-cache git \
 
 EXPOSE [8080, 8081]
 
-ENTRYPOINT ["/ROOT/$ROLE"]
+ENTRYPOINT ["/root/$ROLE/$ROLE"]
