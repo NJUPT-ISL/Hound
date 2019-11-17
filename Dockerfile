@@ -9,7 +9,7 @@ RUN apk add --no-cache git \
     && touch /root/$ROLE/log/$ROLE.log \
     && cd Hound/$ROLE \
     && go build  \
-    && mv $ROLE /root/$ROLE/
+    && mv $ROLE /root/$ROLE \
     && chmod +x /root/$ROLE \
     && cd ../.. \
     && rm -rf Hound \
