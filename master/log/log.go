@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-func ErrPrint(err error) string {
-	return fmt.Sprintf("[Hound Master] - [%s] \"Error: %s\"\n", time.Now(), err)
+func ErrPrint(err error) {
+	fmt.Printf("[Hound Master] - [%s] \"Error: %s\"\n", time.Now(), err)
 }
 
-func Print(log string) string {
-	return fmt.Sprintf("[Hound Master] - [%s] \": %s\"\n", time.Now(), log)
+func Print(log string) {
+	fmt.Printf("[Hound Master] - [%s] \" %s\"\n", time.Now(), log)
 }

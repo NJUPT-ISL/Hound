@@ -1,9 +1,9 @@
 package middlewares
 
 import (
+	"github.com/NJUPT-ISL/Hound/agent/log"
 	"github.com/NJUPT-ISL/Hound/agent/tokens"
 	"github.com/gin-gonic/gin"
-	"log"
 	"os"
 )
 
@@ -13,14 +13,14 @@ func TokenRequestMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if key := c.GetHeader("Hound_Key"); key != "" {
 			if key == os.Getenv("Hound_Key") {
-				log.Printf("Get Hound Key: " + key)
+				log.Print("Get Hound Key: " + key)
 				c.JSON(200, gin.H{
 					"token": T.GetToken(),
 				})
 				c.Abort()
 				return
 			} else {
-				log.Printf("Get Hound Key: " + key)
+				log.Print("Get Hound Key: " + key)
 				c.JSON(401, gin.H{
 					"message": "Authentication failed",
 				})
@@ -38,7 +38,7 @@ func TokenRequestMiddleware(T *tokens.Token) gin.HandlerFunc {
 func TokenAuthMiddleware(T *tokens.Token) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.GetHeader("token")
-		log.Printf("The request token is " + token)
+		log.Print("The request token is " + token)
 		if token == "" {
 			c.JSON(401, gin.H{
 				"message": "API token required",
@@ -67,7 +67,7 @@ func TokenRefreshMiddleware(T *tokens.Token) gin.HandlerFunc {
 				c.JSON(200, gin.H{
 					"token": T.GetToken(),
 				})
-				log.Printf("The new token is: " + T.GetToken())
+				log.Print("The new token is: " + T.GetToken())
 				c.Abort()
 				return
 			} else {

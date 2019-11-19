@@ -33,7 +33,7 @@ func ImagePull(ImageName string) error {
 		log.ErrPrint(err)
 	}
 	out, err := cli.ImagePull(ctx, ImageName, types.ImagePullOptions{All: false})
-	log.Print("run pull task: " + ImageName)
+	log.Print("Run pull task: " + ImageName)
 	if err != nil {
 		log.ErrPrint(err)
 	}
@@ -41,7 +41,7 @@ func ImagePull(ImageName string) error {
 	if _, err := new(bytes.Buffer).ReadFrom(out); err != nil {
 		log.ErrPrint(err)
 	}
-	log.Print("end pull task " + ImageName)
+	log.Print("End pull task " + ImageName)
 	return err
 }
 
@@ -56,7 +56,7 @@ func ImageRemove(ImageName string, Force bool) error {
 	if err != nil {
 		log.ErrPrint(err)
 	}
-	log.Print("run remove task: " + ImageName)
+	log.Print("Run remove task: " + ImageName)
 	if _, err := cli.ImageRemove(ctx, ImageName, types.ImageRemoveOptions{Force: Force}); err != nil {
 		log.ErrPrint(err)
 	}
@@ -76,7 +76,7 @@ func ImagesPrune() (types.ImagesPruneReport, error) {
 	if err != nil {
 		log.ErrPrint(err)
 	}
-	log.Print("run prune task.")
+	log.Print("Run prune task.")
 	out, err := cli.ImagesPrune(ctx, filters.Args{})
 	if err != nil {
 		log.ErrPrint(err)
