@@ -3,18 +3,18 @@ ARG ROLE
 FROM golang:1.13-alpine
 
 # Build Project
-RUN apk add --no-cache git \
-    && git clone https://github.com/NJUPT-ISL/Hound.git \
-    && mkdir -p /root/$ROLE/log \
-    && touch /root/$ROLE/log/$ROLE.log \
-    && go env \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
+    && apk add --no-cache gcc g++
+COPY master /root
+COPY go.mod /root
+COPY go.sum /root
+RUN mkdir -p /root/$ROLE/log \
     && export GO111MODULE=on \
-    && go build ./Hound/$ROLE/main.go -mod ./Hound \
+    && export GOPROXY=https://goproxy.io \ 
+    && go build /root/$ROLE/main.go \
     && mv main /root/$ROLE \
     && chmod +x /root/$ROLE/main \
-    && rm -rf Hound \
-    && apk del git
-
-EXPOSE [8080, 8081]
+    && apk del gcc g++ 
+ 
 
 ENTRYPOINT ["/root/$ROLE/main"]
