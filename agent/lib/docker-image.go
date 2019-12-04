@@ -81,6 +81,7 @@ func ImagesPrune() (types.ImagesPruneReport, error) {
 	if err != nil {
 		log.ErrPrint(err)
 	}
+	log.Print("Prune Success.")
 	return out, err
 }
 

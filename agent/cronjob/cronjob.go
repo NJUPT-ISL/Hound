@@ -6,13 +6,21 @@ import (
 	"github.com/robfig/cron"
 )
 
-func SendUpdateJob() {
-	cronJob := cron.New()
-	spec := "* */5 * * * ?"
-	if err := cronJob.AddFunc(spec, func() {
+func AddSendUpdateJob(c *cron.Cron) {
+	spec := "0 */5 * * * ?"
+	if err := c.AddFunc(spec, func() {
 		lib.SendUpdate()
 	}); err != nil {
 		log.ErrPrint(err)
 	}
-	cronJob.Start()
+}
+
+func AddDockerPruneJob(c *cron.Cron) {
+	if err := c.AddFunc("0 */10 * * * ?", func() {
+		if _, err := lib.ImagesPrune(); err != nil {
+			log.ErrPrint(err)
+		}
+	}); err != nil {
+		log.ErrPrint(err)
+	}
 }

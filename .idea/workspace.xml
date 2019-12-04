@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c347831-0a9b-4f73-8998-171a85d510be" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/cronjob/cronjob.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/cronjob/cronjob.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agent/lib/docker-image.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/lib/docker-image.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/log/agent.log" beforeDir="false" afterPath="$PROJECT_DIR$/agent/log/agent.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/log/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/log/log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent/middlewares/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/middlewares/middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/log/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/master/log/log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/log/master.log" beforeDir="false" afterPath="$PROJECT_DIR$/master/log/master.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/agent/main.go" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,6 +53,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
@@ -85,7 +84,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -96,18 +95,6 @@
       <recent name="$PROJECT_DIR$/agent" />
       <recent name="$PROJECT_DIR$/agent/log" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -173,6 +160,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="TestHistory">
     <history-entry file="go_test_lib - 2019.04.03 at 15h 36m 23s.xml">
       <configuration name="go test lib" configurationId="GoTestRunConfiguration" />
@@ -228,6 +227,12 @@
     <integration-enabled>true</integration-enabled>
     <proxy>https://goproxy.io</proxy>
   </component>
+  <component name="WindowStateProjectService">
+    <state x="964" y="496" key="SettingsEditor" timestamp="1575457646411">
+      <screen x="0" y="23" width="2927" height="1669" />
+    </state>
+    <state x="964" y="496" key="SettingsEditor/0.23.2927.1669@0.23.2927.1669" timestamp="1575457646411" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -244,8 +249,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Hound$TestDockerInfo_in_docker_image_test_go.out" NAME="TestDockerInfo in docker-image_test.go Coverage Results" MODIFIED="1572433920206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Hound$docker_image_test_go.out" NAME="docker-image_test.go Coverage Results" MODIFIED="1554267298464" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Hound$TestDockerInfo_in_docker_image_test_go.out" NAME="TestDockerInfo in docker-image_test.go Coverage Results" MODIFIED="1572433920206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="masterDetails">
     <states>
