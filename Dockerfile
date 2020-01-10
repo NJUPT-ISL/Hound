@@ -10,7 +10,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
 RUN git clone https://github.com/NJUPT-ISL/Hound \
     && export GO111MODULE=on \
     && export GOPROXY=https://goproxy.io \ 
-    && cd Hound/$ROLOE/main.go \
+    && cd Hound/$ROLOE \
     && go build . \
     && chmod +x /root//$ROLE/$ROLE \
     && apk del gcc g++
