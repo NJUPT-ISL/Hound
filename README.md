@@ -22,6 +22,7 @@ It is mainly used for the management and pruning of container images in a contai
 - Set the pulling image according to the label node
 - Periodically update the image
 
+
 ### Get Started
 
 - Run Master
@@ -34,6 +35,12 @@ cd master && go run main.go
 export Hound_Key=123 
 export MasterUrl=localhost:8080
 cd agent && go run main.go
+```
+
+## Deploy Hound to your kubernetes Cluster
+
+```shell 
+
 ```
 
 ### Development log
