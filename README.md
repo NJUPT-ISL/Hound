@@ -40,7 +40,7 @@ cd agent && go run main.go
 ## Deploy Hound to your kubernetes Cluster
 
 ```shell 
-kubectl apply -f 
+kubectl apply -f https://raw.githubusercontent.com/NJUPT-ISL/Hound/master/deploy/hound.yml
 ```
 
 ### Development log
