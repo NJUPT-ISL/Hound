@@ -23,12 +23,15 @@ spec:
         - name: hound-agent
           image: registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent
           env:
-            - name: ROLE
-              value: agent
             - name: Hound_Key
               value: "123"
             - name: MasterUrl
               value: "hound-master:8080"
+          command:
+            - sh
+            - "-c"
+            - |
+              cd /Hound && ./main
           resources:
             limits:
               memory: 200Mi
@@ -63,10 +66,13 @@ spec:
         - name: hound-master
           image: registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master
           env:
-            - name: ROLE
-              value: master
             - name: Hound_Key
               value: "123"
+          command:
+            - sh
+            - "-c"
+            - |
+              cd /Hound && ./main
           ports:
             - containerPort: 8080
 ---
