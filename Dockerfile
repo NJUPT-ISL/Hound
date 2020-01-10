@@ -5,7 +5,7 @@ FROM golang:1.13-alpine
 # Build Project
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
     && apk add --no-cache gcc g++
-COPY $ROLE /root
+COPY $ROLE  /root
 COPY go.mod /root
 COPY go.sum /root
 RUN mkdir -p /root/$ROLE/log \
@@ -15,5 +15,4 @@ RUN mkdir -p /root/$ROLE/log \
     && mv main /root/$ROLE \
     && chmod +x /root/$ROLE/main \
     && apk del gcc g++
-
-
+ENTRYPOINT ["cd", "/root", "&&", " ./main"]
