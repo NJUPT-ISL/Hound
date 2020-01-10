@@ -49,6 +49,9 @@ metadata:
   namespace: hound
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: hound-master
   template:
     metadata:
       labels:
