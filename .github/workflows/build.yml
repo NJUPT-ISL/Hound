@@ -36,6 +36,6 @@ jobs:
           password: ${{ secrets.password }}
         run: |
           echo $password | sudo docker login "registry.cn-hangzhou.aliyuncs.com" -u "$username" --password-stdin
-          docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master
-          docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent
-          docker logout
+          sudo docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master
+          sudo docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent
+          sudo docker logout
