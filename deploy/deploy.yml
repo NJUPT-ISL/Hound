@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hound
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: hound-agent
+  namespace: hound
+  labels:
+    app: hound-agent
+spec:
+  selector:
+    matchLabels:
+      app: hound-agent
+  template:
+    metadata:
+      labels:
+        app: hound-agent
+    spec:
+      containers:
+        - name: hound-agent
+          image: registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent
+          env:
+            - name: Hound_Key
+              value: "123"
+            - name: MasterUrl
+              value: "hound-master:8080"
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+          volumeMounts:
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+---
+apiVersion: extensions/v1
+kind: Deployment
+metadata:
+  name: hound-master
+  namespace: hound
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hound-master
+    spec:
+      containers:
+        - name: hound-master
+          image: registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master
+          ports:
+            - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hound-master
+  namespace: hound
+spec:
+  selector:
+    app: hound-master
+  ports:
+    - name: hound
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
