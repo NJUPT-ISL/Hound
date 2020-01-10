@@ -14,7 +14,5 @@ RUN mkdir -p /root/$ROLE/log \
     && go build /root/$ROLE/main.go \
     && mv main /root/$ROLE \
     && chmod +x /root/$ROLE/main \
-    && apk del gcc g++ 
- 
-
+    && apk del gcc g++
 ENTRYPOINT ["/root/$ROLE/main"]

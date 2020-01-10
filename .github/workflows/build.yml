@@ -29,7 +29,13 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install docker-ce docker-ce-cli containerd.io -y
           docker version
+          echo $password | sudo docker login "registry.cn-hangzhou.aliyuncs.com" -u "$username" --password-stdin
       - name: Build Dockerfile
         run: |
-          docker build --build-arg ROLE=master   -t test:master  .
-          docker build --build-arg ROLE=agent   -t test:agent  .
+          docker build --build-arg ROLE=master   -t registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master  .
+          docker build --build-arg ROLE=agent   -t registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent  .
+      - name: Push Images
+        run: |
+          docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master
+          docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent
+          docker logout
