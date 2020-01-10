@@ -8,9 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Check Docker
-        env:
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
         run: |
           uname -a
           sudo apt-get remove docker docker-engine docker.io containerd runc -y
@@ -29,13 +26,16 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install docker-ce docker-ce-cli containerd.io -y
           docker version
-          echo $password | sudo docker login "registry.cn-hangzhou.aliyuncs.com" -u "$username" --password-stdin
       - name: Build Dockerfile
         run: |
           docker build --build-arg ROLE=master   -t registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master  .
           docker build --build-arg ROLE=agent   -t registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent  .
       - name: Push Images
+        env:
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
         run: |
+          echo $password | sudo docker login "registry.cn-hangzhou.aliyuncs.com" -u "$username" --password-stdin
           docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:master
           docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/hound:agent
           docker logout
